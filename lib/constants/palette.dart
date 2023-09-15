@@ -21,8 +21,8 @@ const dAppBarClr = Color(0xFF356C50);
 const dErrClr = Color(0xFFCF6679);
 
 //common
-const whyt = Color(0xFFFFFFFF);
+const lbg = Color(0xFFFFFFFF);
 const blak = Color(0xFF000000);
-const bg = Color(0xFF171c19);
+const dbg = Color(0xFF171c19);
 const onBg = Color(0xFFd6d6d6);
 const shadow = Color(0xFFe3e3e3);
