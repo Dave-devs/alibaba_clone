@@ -5,7 +5,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 final userProvider = ChangeNotifierProvider((ref) => UserNotifier());
 
 class UserNotifier extends ChangeNotifier{
-  // ignore: unused_field
   User _user = User(
     id: '',
     name: '',
@@ -16,6 +15,8 @@ class UserNotifier extends ChangeNotifier{
     token: '',
     cart: []
   );
+
+  void get user => _user;
 
   void setUser(String user) {
     _user = User.fromJson(user);

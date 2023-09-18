@@ -45,24 +45,17 @@ class AuthService {
       );
 
       //Handle any possible error and show it
-      if(ctx.mounted) {
-        httpErrorHandle(
-          ref: ref,
-          response: response,
-          context: ctx,
-          onSuccess: () {
-            showSnackBar(
-              ctx,
-              'Account created! Login with the same credentials!',
-            );
-          },
-        );
-      }
-      
+      httpErrorHandle(
+        ref: ref,
+        response: response,
+        onSuccess: () {
+          flutterToast(
+            'Account created! Login with the same credentials!',
+          );
+        },
+      ); 
     } catch (e) {
-      if(ctx.mounted) {
-        showSnackBar(ctx, e.toString());
-      }
+      flutterToast(e.toString());
     }
   }
 
@@ -85,27 +78,22 @@ class AuthService {
       );
 
       //If successful, persist user data locally.
-      if(ctx.mounted) {
-        httpErrorHandle(
-          response: response,
-          context: ctx,
-          ref: ref,
-          onSuccess: () async {
-            SharedPreferences prefs = await SharedPreferences.getInstance();
-            ref.read(userProvider).setUser(response.data);
-            await prefs.setString('x-auth-token', jsonDecode(response.data)['token']);
-            // Navigator.pushNamedAndRemoveUntil(
-            //   ctx,
-            //   BottomBar.routeName,
-            //   (route) => false,
-            // );
-          },
-        );
-      }
+      httpErrorHandle(
+        response: response,
+        ref: ref,
+        onSuccess: () async {
+          SharedPreferences prefs = await SharedPreferences.getInstance();
+          ref.read(userProvider).setUser(response.data);
+           await prefs.setString('x-auth-token', jsonDecode(response.data)['token']);
+          // Navigator.pushNamedAndRemoveUntil(
+          //   ctx,
+          //   BottomBar.routeName,
+          //   (route) => false,
+          // );
+        },
+      );
     } catch (e) {
-      if (ctx.mounted) {
-        showSnackBar(ctx, e.toString());
-      }
+      flutterToast(e.toString());
     }
   }
 }

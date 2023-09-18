@@ -1,12 +1,10 @@
 import 'dart:convert';
 import 'package:alibaba_clone/constants/utils/snackbar.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void httpErrorHandle({
   required Response response,
-  required BuildContext context,
   required WidgetRef ref,
   required void Function() onSuccess,
 }) {
@@ -15,12 +13,12 @@ void httpErrorHandle({
       onSuccess();
       break;
     case 400:
-      showSnackBar(context, jsonDecode(response.data)['msg']);
+      flutterToast(jsonDecode(response.data)['msg']);
       break;
     case 500:
-      showSnackBar(context, jsonDecode(response.data)['error']);
+      flutterToast(jsonDecode(response.data)['error']);
       break;
     default:
-      showSnackBar(context, response.data);
+      flutterToast(response.data);
   }
 }
