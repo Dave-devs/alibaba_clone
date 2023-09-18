@@ -15,7 +15,6 @@ const uri = `mongodb+srv://odetundeoreoluwadavid:${password}@alibabacloneappclus
 app.use(express.json());
 app.use(appRouter);
 
-
 //Connect to Database(MongoDB) at default port 3000
 mongoose.connect(uri)
   .then(() => {
@@ -24,8 +23,6 @@ mongoose.connect(uri)
   .catch((err) => {
     console.log('Error in DB connection: ' + err)
   });
-
-
 
 //Listening on port 3000
 app.listen(port, "0.0.0.0", () => {
