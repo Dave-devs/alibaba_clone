@@ -1,23 +1,53 @@
 import 'package:alibaba_clone/constants/widget/reusable_button.dart';
-import 'package:alibaba_clone/constants/widget/reusable_textField.dart';
+import 'package:alibaba_clone/constants/widget/reusable_textfield.dart';
 import 'package:alibaba_clone/presentation/authentication/screens/login_page.dart';
 import 'package:alibaba_clone/presentation/authentication/widget/alt.dart';
 import 'package:alibaba_clone/presentation/authentication/widget/have_acct.dart';
 import 'package:alibaba_clone/presentation/authentication/widget/top_row_text.dart';
+import 'package:alibaba_clone/services/auth_service.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class RegisterPage extends StatefulWidget {
+// class Page extends ConsumerStatefulWidget {
+//   const Page({super.key});
+
+//   @override
+//   ConsumerState<ConsumerStatefulWidget> createState() => _PageState();
+// }
+
+// class _PageState extends ConsumerState<Page> {
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container();
+//   }
+// }
+
+class RegisterPage extends ConsumerStatefulWidget {
+  static const String routeName = '/presentation/authentication/screens/register_page';
   const RegisterPage({super.key});
 
   @override
-  State<RegisterPage> createState() => _RegisterPageState();
+  ConsumerState<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _RegisterPageState extends State<RegisterPage> {
+class _RegisterPageState extends ConsumerState<RegisterPage> {
+  final _signUpFormKey = GlobalKey<FormState>();
   final TextEditingController nameCont = TextEditingController();
   final TextEditingController emailCont = TextEditingController();
   final TextEditingController passwordCont = TextEditingController();
+  final AuthService authService = AuthService();
+
+  void signUpUser() {
+    authService.signupUser(
+      ctx: context,
+      ref: ref,
+      name: nameCont.text,
+      email: emailCont.text,
+      password: passwordCont.text
+    );
+  }
 
   @override
   void dispose() {
@@ -155,6 +185,11 @@ class _RegisterPageState extends State<RegisterPage> {
                         text: 'Register',
                         style: TextStyle(fontWeight: FontWeight.w400, fontSize: 14.sp),
                         minimumSize: Size(200.w, 40.h),
+                        onPressed: () {
+                          if(_signUpFormKey.currentState!.validate()) {
+                            signUpUser();
+                          }
+                        },
                       ),
                     ),
                     

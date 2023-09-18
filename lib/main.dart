@@ -1,4 +1,5 @@
 import 'package:alibaba_clone/constants/palette.dart';
+import 'package:alibaba_clone/constants/utils/on_gen_route.dart';
 import 'package:alibaba_clone/presentation/authentication/screens/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
@@ -81,6 +82,7 @@ class MyApp extends StatelessWidget {
                   backgroundColor: dAppBarClr, elevation: 0)
               ),
               themeMode: ThemeMode.system,
+              onGenerateRoute: onGenerateRoute,
               home: const LoginPage()
             );
         });

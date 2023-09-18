@@ -1,6 +1,4 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-
 import 'package:alibaba_clone/constants/palette.dart';
 
 class ReusableText extends StatelessWidget {
@@ -29,7 +27,6 @@ class ReusableText extends StatelessWidget {
   final int? maxLines;
   final void Function(String)? onFieldSubmitted;
   final void Function(String)? onChanged;
-  final String? Function(String?)? validator;
   const ReusableText({
     Key? key,
     this.controller,
@@ -55,7 +52,6 @@ class ReusableText extends StatelessWidget {
     this.style,
     this.onFieldSubmitted,
     this.onChanged,
-    this.validator,
     required this.obscureText,
     this.maxLines,
   }) : super(key: key);
@@ -63,10 +59,16 @@ class ReusableText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      key: key,
       controller: controller,
       onChanged: onChanged,
       onFieldSubmitted: onFieldSubmitted,
-      validator: validator,
+      validator: (value) {
+        if(value == null || value.isEmpty) {
+          return 'Enter your $hintText';
+        }
+        return null;
+      },
       keyboardType: keyboardType,
       textInputAction: textInputAction,
       style: style,

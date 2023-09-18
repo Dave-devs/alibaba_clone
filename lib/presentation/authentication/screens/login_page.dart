@@ -1,22 +1,37 @@
 import 'package:alibaba_clone/constants/widget/reusable_button.dart';
-import 'package:alibaba_clone/constants/widget/reusable_textField.dart';
+import 'package:alibaba_clone/constants/widget/reusable_textfield.dart';
 import 'package:alibaba_clone/presentation/authentication/screens/register_page.dart';
 import 'package:alibaba_clone/presentation/authentication/widget/alt.dart';
 import 'package:alibaba_clone/presentation/authentication/widget/have_acct.dart';
 import 'package:alibaba_clone/presentation/authentication/widget/top_row_text.dart';
+import 'package:alibaba_clone/services/auth_service.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class LoginPage extends StatefulWidget {
+class LoginPage extends ConsumerStatefulWidget {
+  static const String routeName = '/presentation/authentication/screens/login_page';
   const LoginPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  ConsumerState<LoginPage> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginPageState extends ConsumerState<LoginPage> {
+  final _signInFormKey = GlobalKey<FormState>();
   final TextEditingController emailCont = TextEditingController();
   final TextEditingController passwordCont = TextEditingController();
+  final AuthService authService = AuthService();
+
+
+  void signInUser() {
+    authService.signinUser(
+      ctx: context,
+      ref: ref,
+      email: emailCont.text,
+      password: passwordCont.text
+    );
+  }
 
   @override
   void dispose() {
@@ -134,6 +149,11 @@ class _LoginPageState extends State<LoginPage> {
                   text: 'Log in',
                   style: TextStyle(fontWeight: FontWeight.w400, fontSize: 14.sp),
                   minimumSize: Size(200.w, 40.h),
+                  onPressed: () {
+                    if(_signInFormKey.currentState!.validate()) {
+                      signInUser();
+                    }
+                  },
                 ),
               ),
               
