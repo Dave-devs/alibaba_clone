@@ -1,21 +1,27 @@
 import 'package:alibaba_clone/constants/palette.dart';
 import 'package:alibaba_clone/constants/utils/on_gen_route.dart';
+import 'package:alibaba_clone/presentation/authentication/provider/auth_provider.dart';
 import 'package:alibaba_clone/presentation/authentication/screens/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const ProviderScope(child: MyApp()));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerStatefulWidget {
   // final Stream<dynamic>? stream;
-  const MyApp({
-    super.key,
-  });
+  // final user = ref.read(userProvider);
+  const MyApp({super.key,});
 
+  @override
+  ConsumerState<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends ConsumerState<MyApp> {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
