@@ -3,19 +3,14 @@ import 'package:alibaba_clone/presentation/authentication/provider/auth_provider
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:alibaba_clone/constants/utils/error_handler.dart';
+import 'package:alibaba_clone/presentation/mobile_screen/mobile_screen.dart';
 import 'package:alibaba_clone/constants/utils/snackbar.dart';
 import 'package:alibaba_clone/model/user_model.dart';
 import 'package:alibaba_clone/secrets/ip_address.dart';
 import 'package:flutter/material.dart';
-import 'package:dio/dio.dart';
+import 'package:http/http.dart' as http;
 
 class AuthService {
-  final dio = Dio();
-  var options = Options(
-  headers: {
-    'Content-Type': 'application/json; charset=UTF-8',
-  },
-);
 
   Future<void> signupUser({
     required BuildContext ctx,
@@ -38,10 +33,12 @@ class AuthService {
       );
 
       //Connect with auth signup server and add user data to it
-      Response response =  await dio.post(
-        '$ip/api/signup',
-        data: user.toJson(),
-        options: options
+      var response = await http.post(
+        Uri.parse('$ip/api/signup'),
+        body: user.toJson(),
+        headers: <String, String> {
+          'Content-Type': 'application/json; charset=UTF-8',
+        }
       );
 
       //Handle any possible error and show it
@@ -68,13 +65,15 @@ class AuthService {
   }) async {
     try {
       //Connect with auth signup server and add user data to it
-      Response response = await dio.post(
-        '$ip/api/signin',
-        data: jsonEncode({
+      var response = await http.post(
+        Uri.parse('$ip/api/signin'),
+        body: jsonEncode({
           'email': email,
           'password': password
         }),
-        options: options
+        headers: <String, String> {
+          'Content-Type': 'application/json; charset=UTF-8',
+        }
       );
 
       //If successful, persist user data locally.
@@ -83,16 +82,53 @@ class AuthService {
         ref: ref,
         onSuccess: () async {
           SharedPreferences prefs = await SharedPreferences.getInstance();
-          ref.read(userProvider).setUser(response.data);
-           await prefs.setString('x-auth-token', jsonDecode(response.data)['token']);
-          // Navigator.pushNamedAndRemoveUntil(
-          //   ctx,
-          //   BottomBar.routeName,
-          //   (route) => false,
-          // );
+          ref.read(userProvider).setUser(response.body);
+           await prefs.setString('x-auth-token', jsonDecode(response.body)['token']);
+          // ignore: use_build_context_synchronously
+          Navigator.pushNamedAndRemoveUntil(
+            ctx,
+            MobileScreen.routeName,
+            (route) => false,
+          );
         },
       );
     } catch (e) {
+      flutterToast(e.toString());
+    }
+  }
+
+  Future<void> getUserDetails(WidgetRef ref) async {
+    try {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      String? token = prefs.getString('x-auth-token');
+
+      if(token == null) {
+        prefs.setString('x-auth-token', '');
+      }
+
+      var tokenRes = await http.post(
+        Uri.parse('$ip/tokenisvalid'),
+        headers: <String, String> {
+          'Content-Type': 'application/json; charset=UTF-8',
+          'x-auth-token': token!
+        }
+      );
+
+      var response = jsonDecode(tokenRes.body);
+
+      if(response == true) {
+        var userRes = await http.post(
+        Uri.parse('$ip/'),
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          'x-auth-token': token
+        },
+      );
+
+        var userProv = ref.read(userProvider);
+        userProv.setUser(userRes.body);
+      }
+   } catch (e) {
       flutterToast(e.toString());
     }
   }

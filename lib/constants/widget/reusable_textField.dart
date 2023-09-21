@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:alibaba_clone/constants/palette.dart';
+import 'package:flutter/material.dart';
 
 class ReusableText extends StatelessWidget {
   final TextEditingController? controller;
@@ -10,7 +10,7 @@ class ReusableText extends StatelessWidget {
   final Color? prefixIconColor;
   final Widget? suffixIcon;
   final Color? suffixIconColor;
-  final  bool? filled;
+  final bool? filled;
   final Color? fillColor;
   final Color? focusColor;
   final Color? hoverColor;
@@ -27,8 +27,7 @@ class ReusableText extends StatelessWidget {
   final int? maxLines;
   final void Function(String)? onFieldSubmitted;
   final void Function(String)? onChanged;
-  const ReusableText({
-    Key? key,
+  const ReusableText({super.key, 
     this.controller,
     this.hintText,
     this.hintStyle,
@@ -54,21 +53,14 @@ class ReusableText extends StatelessWidget {
     this.onChanged,
     required this.obscureText,
     this.maxLines,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      key: key,
       controller: controller,
       onChanged: onChanged,
       onFieldSubmitted: onFieldSubmitted,
-      validator: (value) {
-        if(value == null || value.isEmpty) {
-          return 'Enter your $hintText';
-        }
-        return null;
-      },
       keyboardType: keyboardType,
       textInputAction: textInputAction,
       style: style,
@@ -90,15 +82,15 @@ class ReusableText extends StatelessWidget {
         hoverColor: hoverColor,
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(4),
-          borderSide: const BorderSide(color: lErrClr)
+          borderSide: const BorderSide(color: lerror)
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(4),
-          borderSide: const BorderSide(color: lPryClr)
+          borderSide: const BorderSide(color: lprimaryContainer)
         ),
         focusedErrorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(4),
-          borderSide: const BorderSide(color: lErrClr)
+          borderSide: const BorderSide(color: lerror)
         ),
         disabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(4),
@@ -106,11 +98,11 @@ class ReusableText extends StatelessWidget {
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(4),
-          borderSide: const BorderSide(color: lPryClr)
+          borderSide: const BorderSide(color: lprimary)
         ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(4),
-          borderSide: const BorderSide(color: lPryConClr)
+          borderSide: const BorderSide(color: lprimary)
         ),
       ),
     );

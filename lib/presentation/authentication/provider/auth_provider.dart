@@ -16,7 +16,7 @@ class UserNotifier extends ChangeNotifier{
     cart: []
   );
 
-  void get user => _user;
+  dynamic get user => _user;
 
   void setUser(String user) {
     _user = User.fromJson(user);
@@ -28,3 +28,28 @@ class UserNotifier extends ChangeNotifier{
     notifyListeners();
   }
 }
+
+// final userNotifierProvider = StateNotifierProvider<UserNotifier, User>((ref) {
+//   return UserNotifier();
+// });
+
+// class UserNotifier extends StateNotifier<User> {
+//   UserNotifier() : super(User(
+//     id: '',
+//     name: '',
+//     email: '',
+//     password: '',
+//     address: '',
+//     type: '',
+//     token: '',
+//     cart: [],
+//   ));
+
+//   void setUser(String user) {
+//     state = User.fromJson(user);
+//   }
+
+//   void setUserFromModel(User user) {
+//     state = user;
+//   }
+// }

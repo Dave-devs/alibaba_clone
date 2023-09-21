@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 
-class MobieScreen extends StatefulWidget {
-  const MobieScreen({super.key});
+class MobileScreen extends StatefulWidget {
+  static const String routeName = '/mobile_screen_page';
+  const MobileScreen({super.key});
 
   @override
-  State<MobieScreen> createState() => _MobieScreenState();
+  State<MobileScreen> createState() => _MobileScreenState();
 }
 
-class _MobieScreenState extends State<MobieScreen> {
+class _MobileScreenState extends State<MobileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

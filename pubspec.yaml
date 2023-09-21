@@ -40,7 +40,7 @@ dependencies:
   animate_do: ^3.0.2
   animated_text_kit: ^4.2.2
   auto_size_text: ^3.0.0
-  dio: ^4.0.0
+  http:
   shared_preferences: ^2.2.1
   cached_network_image:
   flutter_screenutil: ^5.8.4

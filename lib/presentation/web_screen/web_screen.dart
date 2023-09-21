@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class WebScreen extends StatefulWidget {
+  static const String routeName = '/web_screen_page';
   const WebScreen({super.key});
 
   @override

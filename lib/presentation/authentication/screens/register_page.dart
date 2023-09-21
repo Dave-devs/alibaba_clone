@@ -25,7 +25,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 // }
 
 class RegisterPage extends ConsumerStatefulWidget {
-  static const String routeName = '/presentation/authentication/screens/register_page';
+  static const String routeName = '/register_page';
   const RegisterPage({super.key});
 
   @override
@@ -33,28 +33,27 @@ class RegisterPage extends ConsumerStatefulWidget {
 }
 
 class _RegisterPageState extends ConsumerState<RegisterPage> {
-  final _signUpFormKey = GlobalKey<FormState>();
-  final TextEditingController nameCont = TextEditingController();
-  final TextEditingController emailCont = TextEditingController();
-  final TextEditingController passwordCont = TextEditingController();
+  final TextEditingController _nameCont = TextEditingController();
+  final TextEditingController _emailCont = TextEditingController();
+  final TextEditingController _passwordCont = TextEditingController();
   final AuthService authService = AuthService();
 
   void signUpUser() {
     authService.signupUser(
       ctx: context,
       ref: ref,
-      name: nameCont.text,
-      email: emailCont.text,
-      password: passwordCont.text
+      name: _nameCont.text,
+      email: _emailCont.text,
+      password: _passwordCont.text
     );
   }
 
   @override
   void dispose() {
     super.dispose();
-    nameCont.dispose();
-    emailCont.dispose();
-    passwordCont.dispose();
+    _nameCont.dispose();
+    _emailCont.dispose();
+    _passwordCont.dispose();
   }
 
   @override
@@ -96,7 +95,7 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 15.w),
                       child: ReusableText(
-                        controller: nameCont,
+                        controller: _nameCont,
                         hintText: 'johndoe',
                         obscureText: false,
                         maxLines: 1,
@@ -112,7 +111,7 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 15.w),
                       child: ReusableText(
-                        controller: emailCont,
+                        controller: _emailCont,
                         hintText: 'johndoe@gmail.com',
                         obscureText: false,
                         maxLines: 1,
@@ -127,7 +126,7 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 15.w),
                       child: ReusableText(
-                        controller: passwordCont,
+                        controller: _passwordCont,
                         hintText: 'password',
                         obscureText: true,
                         maxLines: 1,
@@ -158,6 +157,7 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                     
                     //Alternatives rows
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         AltItem(
                           onTap: () {
@@ -186,9 +186,7 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                         style: TextStyle(fontWeight: FontWeight.w400, fontSize: 14.sp),
                         minimumSize: Size(200.w, 40.h),
                         onPressed: () {
-                          if(_signUpFormKey.currentState!.validate()) {
-                            signUpUser();
-                          }
+                          signUpUser();
                         },
                       ),
                     ),

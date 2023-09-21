@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:alibaba_clone/constants/utils/snackbar.dart';
-import 'package:dio/dio.dart';
+import 'package:http/http.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void httpErrorHandle({
@@ -13,12 +13,12 @@ void httpErrorHandle({
       onSuccess();
       break;
     case 400:
-      flutterToast(jsonDecode(response.data)['msg']);
+      flutterToast(jsonDecode(response.body)['msg']);
       break;
     case 500:
-      flutterToast(jsonDecode(response.data)['error']);
+      flutterToast(jsonDecode(response.body)['error']);
       break;
     default:
-      flutterToast(response.data);
+      flutterToast(response.body);
   }
 }

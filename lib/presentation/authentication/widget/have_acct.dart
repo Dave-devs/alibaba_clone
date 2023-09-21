@@ -1,4 +1,3 @@
-import 'package:alibaba_clone/constants/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -13,10 +12,10 @@ class HaveAcctRow extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(text1, style: TextStyle(fontSize: 12.5.sp, fontWeight: FontWeight.w300, color: lTerClr),),
+        Text(text1, style: TextStyle(fontSize: 12.5.sp, fontWeight: FontWeight.w300),),
         GestureDetector(
           onTap: onTap,
-          child: Text(text2, style: TextStyle(fontSize: 12.5.sp, fontWeight: FontWeight.w300, color: lTerClr),)
+          child: Text(text2, style: TextStyle(fontSize: 12.5.sp, fontWeight: FontWeight.w300),)
         )
       ],
     );

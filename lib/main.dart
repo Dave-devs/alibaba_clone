@@ -1,7 +1,10 @@
 import 'package:alibaba_clone/constants/palette.dart';
 import 'package:alibaba_clone/constants/utils/on_gen_route.dart';
+import 'package:alibaba_clone/presentation/admin/screens/admin_page.dart';
 import 'package:alibaba_clone/presentation/authentication/provider/auth_provider.dart';
 import 'package:alibaba_clone/presentation/authentication/screens/login_page.dart';
+import 'package:alibaba_clone/presentation/mobile_screen/mobile_screen.dart';
+import 'package:alibaba_clone/services/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -14,7 +17,6 @@ void main() {
 
 class MyApp extends ConsumerStatefulWidget {
   // final Stream<dynamic>? stream;
-  // final user = ref.read(userProvider);
   const MyApp({super.key,});
 
   @override
@@ -22,6 +24,14 @@ class MyApp extends ConsumerStatefulWidget {
 }
 
 class _MyAppState extends ConsumerState<MyApp> {
+  final AuthService authService = AuthService();
+
+  @override
+  void initState() {
+    super.initState();
+    authService.getUserDetails(ref);
+  }
+  
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
@@ -34,91 +44,97 @@ class _MyAppState extends ConsumerState<MyApp> {
               debugShowCheckedModeBanner: false,
               theme: FlexThemeData.light(
                 useMaterial3: true,
-                primary: lPryClr,
-                primaryContainer: lPryConClr,
-                onPrimary: onBg,
-                onError: onBg,
-                secondary: lSecClr,
-                secondaryContainer: lSecConClr,
-                tertiary: lTerClr,
-                tertiaryContainer: lTerConClr,
-                error: lErrClr,
-                blendLevel: 20,
-                appBarOpacity: 0.95,
-                visualDensity: FlexColorScheme.comfortablePlatformDensity,
-                fontFamily: GoogleFonts.roboto().fontFamily,
-                surfaceMode: FlexSurfaceMode.highScaffoldLowSurface,
-                tabBarStyle: FlexTabBarStyle.forBackground,
+                primary: lprimary,
+                onPrimary: lonPrimary,
+                primaryContainer: lprimaryContainer,
+                onPrimaryContainer: lonPrimaryContainer,
+                secondary: lsecondary,
+                onSecondary: lonSecondary,
+                secondaryContainer: lsecondaryContainer,
+                onSecondaryContainer: lonSecondaryContainer,
+                tertiary: ltertiary,
+                onTertiary: lonTertiary,
+                tertiaryContainer: ltertiaryContainer,
+                onTertiaryContainer: lonTertiaryContainer,
+                error: lerror,
+                onError: lonError,
+                background: lbackground,
+                onBackground: lonBackground,
+                surface: lsurface,
+                onSurface: lonSurface,
+                surfaceTint: lsurfaceTint,
+                surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
+                blendLevel: 7,
                 subThemesData: const FlexSubThemesData(
-                    blendOnLevel: 20,
-                    blendOnColors: false,
-                    inputDecoratorIsFilled: false),
-                useMaterial3ErrorColors: true,
+                  blendOnLevel: 10,
+                  blendOnColors: false,
+                  useTextTheme: true,
+                  useM2StyleDividerInM3: true,
+                  alignedDropdown: true,
+                  useInputDecoratorThemeInDialogs: true,
+                ),
+                visualDensity: FlexColorScheme.comfortablePlatformDensity,
+                swapLegacyOnMaterial3: true,
               ).copyWith(
                 brightness: Brightness.light,
                 scaffoldBackgroundColor: Colors.white,
                 appBarTheme: const AppBarTheme(
-                backgroundColor: lAppBarClr, elevation: 0)
+                  backgroundColor: lbackgroundColor,
+                  elevation: 0
+                )
               ),
               darkTheme: FlexThemeData.dark(
+                primary: dprimary,
+                onPrimary: donPrimary,
+                primaryContainer: dprimaryContainer,
+                onPrimaryContainer: donPrimaryContainer,
+                secondary: dsecondary,
+                onSecondary: donSecondary,
+                secondaryContainer: dsecondaryContainer,
+                onSecondaryContainer: donSecondaryContainer,
+                tertiary: dtertiary,
+                onTertiary: donTertiary,
+                tertiaryContainer: dtertiaryContainer,
+                onTertiaryContainer: donTertiaryContainer,
+                error: derror,
+                onError: donError,
+                background: dbackground,
+                onBackground: donBackground,
+                surface: dsurface,
+                onSurface: donSurface,
+                surfaceTint: dsurfaceTint,
                 useMaterial3: true,
-                primary: dPryClr,
-                primaryContainer: dPryConClr,
-                onPrimary: onBg,
-                onError: onBg,
-                secondary: dSecClr,
-                secondaryContainer: dSecConClr,
-                tertiary: dTerClr,
-                tertiaryContainer: dTerConClr,
-                appBarBackground: dAppBarClr,
-                error: dErrClr,
-                surfaceMode: FlexSurfaceMode.highBackgroundLowScaffold,
-                blendLevel: 15,
+                surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
+                blendLevel: 13,
+                subThemesData: const FlexSubThemesData(
+                  blendOnLevel: 20,
+                  useTextTheme: true,
+                  useM2StyleDividerInM3: true,
+                  alignedDropdown: true,
+                  useInputDecoratorThemeInDialogs: true,
+                ),
+                visualDensity: FlexColorScheme.comfortablePlatformDensity,
+                swapLegacyOnMaterial3: true,
                 appBarStyle: FlexAppBarStyle.background,
                 appBarOpacity: 0.90,
-                visualDensity: FlexColorScheme.comfortablePlatformDensity,
                 fontFamily: GoogleFonts.roboto().fontFamily,
                 tabBarStyle: FlexTabBarStyle.forBackground,
-                subThemesData: const FlexSubThemesData(
-                    blendOnLevel: 30, inputDecoratorIsFilled: false),
               ).copyWith(
                 brightness: Brightness.dark,
-                scaffoldBackgroundColor: const Color(0xFF252525),
+                scaffoldBackgroundColor: dscaffoldBackgroundColor,
                 appBarTheme: const AppBarTheme(
-                  backgroundColor: dAppBarClr, elevation: 0)
+                  backgroundColor: dbackgroundColor,
+                  elevation: 0
+                )
               ),
               themeMode: ThemeMode.system,
               onGenerateRoute: onGenerateRoute,
-              home: const LoginPage()
+              home: ref.watch(userProvider.notifier).user.token.isNotEmpty 
+                ? ref.watch(userProvider.notifier).user.type == 'user'
+                  ? const MobileScreen()
+                  : const AdminPage()
+                  : const LoginPage()
             );
         });
   }
 }
-
-
-// StreamBuilder(
-//               stream: stream,
-//               builder: (_, snapshot) {
-//                 if (snapshot.connectionState == ConnectionState.waiting) {
-//                   return const Center(
-//                     child: CircularProgressIndicator(
-//                       color: whyt,
-//                     ),
-//                   );
-//                 }
-
-//                 if (snapshot.connectionState == ConnectionState.active) {
-//                   if (snapshot.hasData) {
-//                     return const ScreenLayoutDimension(webScreen: WebScreen(), mobileScreen: MobieScreen());
-//                   }
-
-//                   if (snapshot.hasError) {
-//                     return Center(
-//                       child: Text('${snapshot.error}'),
-//                     );
-//                   }
-//                 }
-
-//                 return const LoginPage();
-//               }
-//             ),

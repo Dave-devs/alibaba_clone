@@ -10,7 +10,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class LoginPage extends ConsumerStatefulWidget {
-  static const String routeName = '/presentation/authentication/screens/login_page';
+  static const String routeName = '/login_page';
   const LoginPage({super.key});
 
   @override
