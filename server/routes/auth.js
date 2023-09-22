@@ -4,7 +4,7 @@ const bcryptjs = require('bcryptjs');
 const authRouter = express.Router();
 // const authRouter = express.Router('./routes/auth.js');
 const jwt = require('jsonwebtoken');
-const auth = require('./middlewares/auth');
+const auth = require('../middlewares/auth');
 
 //SIGNUP SERVER REQUEST
 authRouter.post('/api/signup', async (req, res) => {
@@ -47,13 +47,13 @@ authRouter.post('/api/signin', async (req, res) => {
         //Validate if supplied email is present in users DB or else
         const user = await User.findOne({email: email});
         if(!user) {
-            res.status(400).json({msg: "User with email does not exist!"});
+            return res.status(400).json({msg: "User with email does not exist!"});
         }
 
         //Validate if supplied password matched with one in users DB
         const isMatched = await bcryptjs.compare(password, user.password);
         if(!isMatched) {
-            res.status(400).json({msg: "Password does not match!"});
+            return res.status(400).json({msg: "Password does not match!"});
         }
 
         /*We create a Json Web Token if above validations are true
