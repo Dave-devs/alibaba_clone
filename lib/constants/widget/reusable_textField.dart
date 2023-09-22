@@ -1,5 +1,7 @@
-import 'package:alibaba_clone/constants/palette.dart';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+
+import 'package:alibaba_clone/constants/palette.dart';
 
 class ReusableText extends StatelessWidget {
   final TextEditingController? controller;
@@ -49,18 +51,25 @@ class ReusableText extends StatelessWidget {
     this.keyboardType,
     this.textInputAction,
     this.style,
-    this.onFieldSubmitted,
-    this.onChanged,
     required this.obscureText,
     this.maxLines,
+    this.onFieldSubmitted,
+    this.onChanged,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      key: key,
       controller: controller,
       onChanged: onChanged,
       onFieldSubmitted: onFieldSubmitted,
+      validator: (String? value) {
+        if(value == null || value.isEmpty) {
+          return "Enter $hintText";
+        }
+        return null;
+      },
       keyboardType: keyboardType,
       textInputAction: textInputAction,
       style: style,

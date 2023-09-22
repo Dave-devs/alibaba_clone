@@ -22,15 +22,22 @@ class _LoginPageState extends ConsumerState<LoginPage> {
   final TextEditingController emailCont = TextEditingController();
   final TextEditingController passwordCont = TextEditingController();
   final AuthService authService = AuthService();
+  late bool isLoading;
 
 
   void signInUser() {
+    setState(() {
+      isLoading = true;
+    });
     authService.signinUser(
       ctx: context,
       ref: ref,
       email: emailCont.text,
       password: passwordCont.text
     );
+    setState(() {
+      isLoading = false;
+    });
   }
 
   @override
@@ -67,94 +74,101 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                 ),
               ),
               
-              SizedBox(height: 25.h,),
+              Form(
+                key: _signInFormKey,
+                child: Column(
+                  children: [
+                    SizedBox(height: 25.h,),
               
-              //Email TextField
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 15.w),
-                child: ReusableText(
-                  controller: emailCont,
-                  hintText: 'johndoe@gmail.com',
-                  obscureText: false,
-                  maxLines: 1,
-                  contentPadding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 10.h),
-                  hintStyle: TextStyle(fontSize: 10.sp, fontWeight: FontWeight.w200),
-                ),
-              ),
+                    //Email TextField
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 15.w),
+                      child: ReusableText(
+                        controller: emailCont,
+                        hintText: 'johndoe@gmail.com',
+                        obscureText: false,
+                        maxLines: 1,
+                        contentPadding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 10.h),
+                        hintStyle: TextStyle(fontSize: 10.sp, fontWeight: FontWeight.w200),
+                      ),
+                    ),
               
-              SizedBox(height: 10.h,),
+                    SizedBox(height: 10.h,),
               
-              //Password TextField
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 15.w),
-                child: ReusableText(
-                  controller: passwordCont,
-                  hintText: 'password',
-                  obscureText: true,
-                  maxLines: 1,
-                  contentPadding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 10.h),
-                  hintStyle: TextStyle(fontSize: 10.sp, fontWeight: FontWeight.w200),
-                ),
-              ),
+                    //Password TextField
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 15.w),
+                      child: ReusableText(
+                        controller: passwordCont,
+                        hintText: 'password',
+                        obscureText: true,
+                        maxLines: 1,
+                        contentPadding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 10.h),
+                        hintStyle: TextStyle(fontSize: 10.sp, fontWeight: FontWeight.w200),
+                      ),
+                    ),
               
-              SizedBox(height: 25.h,),
+                    SizedBox(height: 25.h,),
               
-              //Or login with alternative and Don't have an account? row
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 15.w),
-                child: HaveAcctRow(
-                  text1: 'Or continue with',
-                  text2: "Don't have account?",
-                  onTap: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(builder: (context) => const RegisterPage())
-                    );
-                  }
-                ),
-              ),
+                    //Or login with alternative and Don't have an account? row
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 15.w),
+                      child: HaveAcctRow(
+                        text1: 'Or continue with',
+                        text2: "Don't have account?",
+                        onTap: () {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(builder: (context) => const RegisterPage())
+                          );
+                        }
+                      ),
+                    ),
 
-              SizedBox(height: 25.h,),
+                    SizedBox(height: 25.h,),
               
-              //Alternatives rows
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  AltItem(
-                    onTap: () {
+                    //Alternatives rows
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        AltItem(
+                          onTap: () {
 
-                    },
-                    item: 'assets/images/google_logo.png'
-                  ),
-                  AltItem(
-                    onTap: () {
+                          },
+                          item: 'assets/images/google_logo.png'
+                        ),
+                        AltItem(
+                          onTap: () {
 
-                    },
-                    item: 'assets/images/facebook_logo.png'
-                  ),
-                  AltItem(
-                    onTap: () {
+                          },
+                          item: 'assets/images/facebook_logo.png'
+                        ),
+                        AltItem(
+                          onTap: () {
 
-                    },
-                    item: 'assets/images/apple_logo.png'
-                  ),
-                ],
-              ),
+                          },
+                          item: 'assets/images/apple_logo.png'
+                        ),
+                      ],
+                    ),
               
-              SizedBox(height: 25.h,),
+                    SizedBox(height: 25.h,),
               
-              //Login Button
-              Center(
-                child: ReusableButton(
-                  text: 'Log in',
-                  style: TextStyle(fontWeight: FontWeight.w400, fontSize: 14.sp),
-                  minimumSize: Size(200.w, 40.h),
-                  onPressed: () {
-                    if(_signInFormKey.currentState!.validate()) {
-                      signInUser();
-                    }
-                  },
-                ),
+                    //Login Button
+                    Center(
+                      child: ReusableButton(
+                        text: 'Log in',
+                        style: TextStyle(fontWeight: FontWeight.w400, fontSize: 14.sp),
+                        minimumSize: Size(200.w, 40.h),
+                        onPressed: () {
+                          if(_signInFormKey.currentState!.validate()) {
+                            signInUser();
+                          }
+                        },
+                      ),
+                    ),
+                  ]
+                )
               ),
               
               SizedBox(height: 30.h,),

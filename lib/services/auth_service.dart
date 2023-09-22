@@ -99,13 +99,16 @@ class AuthService {
 
   Future<void> getUserDetails(WidgetRef ref) async {
     try {
+      //Get the token first
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String? token = prefs.getString('x-auth-token');
 
+      //If token is null set it (for first time)
       if(token == null) {
         prefs.setString('x-auth-token', '');
       }
 
+      //Validate token authenticity
       var tokenRes = await http.post(
         Uri.parse('$ip/tokenisvalid'),
         headers: <String, String> {
@@ -116,6 +119,9 @@ class AuthService {
 
       var response = jsonDecode(tokenRes.body);
 
+      //If token validation is genuine
+
+      //Request user data
       if(response == true) {
         var userRes = await http.post(
         Uri.parse('$ip/'),

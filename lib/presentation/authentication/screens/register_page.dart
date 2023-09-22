@@ -9,21 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-// class Page extends ConsumerStatefulWidget {
-//   const Page({super.key});
-
-//   @override
-//   ConsumerState<ConsumerStatefulWidget> createState() => _PageState();
-// }
-
-// class _PageState extends ConsumerState<Page> {
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container();
-//   }
-// }
-
 class RegisterPage extends ConsumerStatefulWidget {
   static const String routeName = '/register_page';
   const RegisterPage({super.key});
@@ -33,12 +18,18 @@ class RegisterPage extends ConsumerStatefulWidget {
 }
 
 class _RegisterPageState extends ConsumerState<RegisterPage> {
+  final _signUpFormKey = GlobalKey<FormState>();
   final TextEditingController _nameCont = TextEditingController();
   final TextEditingController _emailCont = TextEditingController();
   final TextEditingController _passwordCont = TextEditingController();
   final AuthService authService = AuthService();
+  late bool isLoading;
 
   void signUpUser() {
+    setState(() {
+      isLoading = true;
+    });
+
     authService.signupUser(
       ctx: context,
       ref: ref,
@@ -46,6 +37,9 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
       email: _emailCont.text,
       password: _passwordCont.text
     );
+    setState(() {
+      isLoading = false;
+    });
   }
 
   @override
@@ -88,107 +82,117 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                         text2: 'Choose one of the options to go'
                       ),
                     ),
-                    
-                    SizedBox(height: 25.h,),
-                    
-                    //Email TextField
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 15.w),
-                      child: ReusableText(
-                        controller: _nameCont,
-                        hintText: 'johndoe',
-                        obscureText: false,
-                        maxLines: 1,
-                        contentPadding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 10.h),
-                        hintStyle: TextStyle(
-                            fontSize: 10.sp, fontWeight: FontWeight.w200),
-                      ),
-                    ),
-                    
-                    SizedBox(height: 10.h,),
-                    
-                    //Email TextField
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 15.w),
-                      child: ReusableText(
-                        controller: _emailCont,
-                        hintText: 'johndoe@gmail.com',
-                        obscureText: false,
-                        maxLines: 1,
-                        contentPadding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 10.h),
-                        hintStyle: TextStyle(fontSize: 10.sp, fontWeight: FontWeight.w200),
-                      ),
-                    ),
-                    
-                    SizedBox(height: 10.h,),
-                    
-                    //Password TextField
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 15.w),
-                      child: ReusableText(
-                        controller: _passwordCont,
-                        hintText: 'password',
-                        obscureText: true,
-                        maxLines: 1,
-                        contentPadding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 10.h),
-                        hintStyle: TextStyle(
-                            fontSize: 10.sp, fontWeight: FontWeight.w200),
-                      ),
-                    ),
-                    
-                    SizedBox(height: 25.h,),
-                    
-                    //Or login with alternative and Don't have an account? row
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 15.w),
-                      child: HaveAcctRow(
-                        text1: 'Or continue with',
-                        text2: "Don't have account?",
-                        onTap: () {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(builder: (context) => const LoginPage())
-                          );
-                        }
-                      ),
-                    ),
 
-                    SizedBox(height: 25.h,),
+                    Form(
+                      key: _signUpFormKey,
+                      child: Column(
+                        children: [
+                          SizedBox(height: 25.h,),
                     
-                    //Alternatives rows
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        AltItem(
-                          onTap: () {
-
-                          },
-                          item: 'assets/images/google_logo.png'),
-                        AltItem(
-                          onTap: () {
-
-                          },
-                          item: 'assets/images/facebook_logo.png'),
-                        AltItem(
-                          onTap: () {
-
-                          },
-                          item: 'assets/images/apple_logo.png')
-                      ],
-                    ),
+                          //Email TextField
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 15.w),
+                            child: ReusableText(
+                              controller: _nameCont,
+                              hintText: 'johndoe',
+                              obscureText: false,
+                              maxLines: 1,
+                              contentPadding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 10.h),
+                              hintStyle: TextStyle(fontSize: 10.sp, fontWeight: FontWeight.w200),
+                            ),
+                          ),
                     
-                    SizedBox(height: 25.h,),
+                          SizedBox(height: 10.h,),
                     
-                    //Login Button
-                    Center(
-                      child: ReusableButton(
-                        text: 'Register',
-                        style: TextStyle(fontWeight: FontWeight.w400, fontSize: 14.sp),
-                        minimumSize: Size(200.w, 40.h),
-                        onPressed: () {
-                          signUpUser();
-                        },
-                      ),
+                          //Email TextField
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 15.w),
+                            child: ReusableText(
+                              controller: _emailCont,
+                              hintText: 'johndoe@gmail.com',
+                              obscureText: false,
+                              maxLines: 1,
+                              contentPadding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 10.h),
+                              hintStyle: TextStyle(fontSize: 10.sp, fontWeight: FontWeight.w200),
+                            ),
+                          ),
+                    
+                          SizedBox(height: 10.h,),
+                    
+                          //Password TextField
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 15.w),
+                            child: ReusableText(
+                              controller: _passwordCont,
+                              hintText: 'password',
+                              obscureText: true,
+                              maxLines: 1,
+                              contentPadding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 10.h),
+                              hintStyle: TextStyle(fontSize: 10.sp, fontWeight: FontWeight.w200),
+                            ),
+                          ),
+                    
+                          SizedBox(height: 25.h,),
+                    
+                          //Or login with alternative and Don't have an account? row
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 15.w),
+                            child: HaveAcctRow(
+                              text1: 'Or continue with',
+                              text2: "Already have an account?",
+                              onTap: () {
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => const LoginPage())
+                                );
+                              }
+                            ),
+                          ),
+
+                          SizedBox(height: 25.h,),
+                    
+                          //Alternatives rows
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              AltItem(
+                                onTap: () {
+
+                                },
+                                item: 'assets/images/google_logo.png'
+                              ),
+                              AltItem(
+                                onTap: () {
+
+                                },
+                                item: 'assets/images/facebook_logo.png'
+                              ),
+                              AltItem(
+                                onTap: () {
+
+                                },
+                                item: 'assets/images/apple_logo.png'
+                              )
+                            ],
+                          ),
+                    
+                          SizedBox(height: 25.h,),
+                    
+                          //Login Button
+                          Center(
+                            child: ReusableButton(
+                              text: 'Register',
+                              style: TextStyle(fontWeight: FontWeight.w400, fontSize: 14.sp),
+                              minimumSize: Size(200.w, 40.h),
+                              onPressed: () {
+                                if(_signUpFormKey.currentState!.validate()) {
+                                  signUpUser();
+                                }
+                              },
+                            ),
+                          ),
+                        ]
+                      )
                     ),
                     
                     SizedBox(height: 30.h,),
@@ -198,6 +202,7 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
             ),
             SizedBox(height: 100.h,),
           ],
-        ));
-  }
+        )
+      );
+    }
 }
