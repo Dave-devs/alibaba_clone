@@ -67,7 +67,7 @@ authRouter.post('/api/signin', async (req, res) => {
 });
 
 /**NOTE: After we logged in, we use JsonWebToken to verify if we are who we say we are. 
- * It's like a pin code into the application anytime we want to use the app.
+ * It's like an access key into the application anytime we want to use the app.
  */
 
 //CHECKE IF GENERATED TOKEN IS VALID

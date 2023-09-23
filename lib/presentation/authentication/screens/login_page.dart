@@ -6,18 +6,17 @@ import 'package:alibaba_clone/presentation/authentication/widget/have_acct.dart'
 import 'package:alibaba_clone/presentation/authentication/widget/top_row_text.dart';
 import 'package:alibaba_clone/services/auth_service.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class LoginPage extends ConsumerStatefulWidget {
+class LoginPage extends StatefulWidget {
   static const String routeName = '/login_page';
   const LoginPage({super.key});
 
   @override
-  ConsumerState<LoginPage> createState() => _LoginPageState();
+  State<LoginPage> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends ConsumerState<LoginPage> {
+class _LoginPageState extends State<LoginPage> {
   final _signInFormKey = GlobalKey<FormState>();
   final TextEditingController emailCont = TextEditingController();
   final TextEditingController passwordCont = TextEditingController();
@@ -30,8 +29,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
       isLoading = true;
     });
     authService.signinUser(
-      ctx: context,
-      ref: ref,
+      context: context,
       email: emailCont.text,
       password: passwordCont.text
     );

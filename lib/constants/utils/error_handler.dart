@@ -1,11 +1,11 @@
 import 'dart:convert';
 import 'package:alibaba_clone/constants/utils/snackbar.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-void httpErrorHandle({
+void httpErrorHandler({
   required Response response,
-  required WidgetRef ref,
+  required BuildContext context,
   required void Function() onSuccess,
 }) {
   switch (response.statusCode) {

@@ -1,35 +1,41 @@
 import 'package:alibaba_clone/constants/palette.dart';
 import 'package:alibaba_clone/constants/utils/on_gen_route.dart';
-import 'package:alibaba_clone/presentation/admin/screens/admin_page.dart';
 import 'package:alibaba_clone/presentation/authentication/provider/auth_provider.dart';
 import 'package:alibaba_clone/presentation/authentication/screens/login_page.dart';
 import 'package:alibaba_clone/presentation/mobile_screen/mobile_screen.dart';
 import 'package:alibaba_clone/services/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void main() {
-  runApp(const ProviderScope(child: MyApp()));
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => UserNotifier())
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
-class MyApp extends ConsumerStatefulWidget {
+class MyApp extends StatefulWidget {
   // final Stream<dynamic>? stream;
   const MyApp({super.key,});
 
   @override
-  ConsumerState<MyApp> createState() => _MyAppState();
+  State<MyApp> createState() => _MyAppState();
 }
 
-class _MyAppState extends ConsumerState<MyApp> {
+class _MyAppState extends State<MyApp> {
   final AuthService authService = AuthService();
 
   @override
   void initState() {
     super.initState();
-    authService.getUserDetails(ref);
+    authService.getUserDetails(context);
   }
   
   @override
@@ -128,11 +134,11 @@ class _MyAppState extends ConsumerState<MyApp> {
                 )
               ),
               themeMode: ThemeMode.system,
-              onGenerateRoute: onGenerateRoute,
-              home: ref.watch(userProvider.notifier).user.token.isNotEmpty 
-                ? ref.watch(userProvider.notifier).user.type == 'user'
+              onGenerateRoute: ((settings) => onGenerateRoute(settings)),
+              /*If Token is not empty, it means we have saved the token and can go to app bottomNav Page.
+              Else w e go to SignupPage*/
+              home: Provider.of<UserNotifier>(context).user.token.isNotEmpty
                   ? const MobileScreen()
-                  : const AdminPage()
                   : const LoginPage()
             );
         });

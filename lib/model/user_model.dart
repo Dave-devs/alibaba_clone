@@ -1,8 +1,7 @@
 import 'dart:convert';
-import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-
+@immutable
 class User {
   final String id;
   final String name;
@@ -11,9 +10,8 @@ class User {
   final String address;
   final String type;
   final String token;
-  final List<dynamic> cart;
 
-  User({
+  const User({
     required this.id,
     required this.name,
     required this.email,
@@ -21,7 +19,6 @@ class User {
     required this.address,
     required this.type,
     required this.token,
-    required this.cart,
   });
 
   User copyWith({
@@ -32,7 +29,6 @@ class User {
     String? address,
     String? type,
     String? token,
-    List<dynamic>? cart,
   }) {
     return User(
       id: id ?? this.id,
@@ -42,7 +38,6 @@ class User {
       address: address ?? this.address,
       type: type ?? this.type,
       token: token ?? this.token,
-      cart: cart ?? this.cart,
     );
   }
 
@@ -55,21 +50,19 @@ class User {
       'address': address,
       'type': type,
       'token': token,
-      'cart': cart,
     };
   }
 
   factory User.fromMap(Map<String, dynamic> map) {
     return User(
-      id: map['_id'] as String,
+      id: map['id'] as String,
       name: map['name'] as String,
       email: map['email'] as String,
       password: map['password'] as String,
       address: map['address'] as String,
       type: map['type'] as String,
       token: map['token'] as String,
-      cart: List<dynamic>.from((map['cart'] as List<dynamic>),
-    ));
+    );
   }
 
   String toJson() => json.encode(toMap());
@@ -78,7 +71,7 @@ class User {
 
   @override
   String toString() {
-    return 'User(id: $id, name: $name, email: $email, password: $password, address: $address, type: $type, token: $token, cart: $cart)';
+    return 'User(id: $id, name: $name, email: $email, password: $password, address: $address, type: $type, token: $token)';
   }
 
   @override
@@ -92,8 +85,7 @@ class User {
       other.password == password &&
       other.address == address &&
       other.type == type &&
-      other.token == token &&
-      listEquals(other.cart, cart);
+      other.token == token;
   }
 
   @override
@@ -104,7 +96,6 @@ class User {
       password.hashCode ^
       address.hashCode ^
       type.hashCode ^
-      token.hashCode ^
-      cart.hashCode;
+      token.hashCode;
   }
 }
