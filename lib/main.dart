@@ -1,43 +1,43 @@
 import 'package:alibaba_clone/constants/palette.dart';
 import 'package:alibaba_clone/constants/utils/on_gen_route.dart';
 import 'package:alibaba_clone/presentation/authentication/provider/auth_provider.dart';
-import 'package:alibaba_clone/presentation/authentication/screens/login_page.dart';
+import 'package:alibaba_clone/presentation/authentication/screens/register_page.dart';
+import 'package:alibaba_clone/presentation/dimension/layout_buider.dart';
 import 'package:alibaba_clone/presentation/mobile_screen/mobile_screen.dart';
+import 'package:alibaba_clone/presentation/web_screen/web_screen.dart';
 import 'package:alibaba_clone/services/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void main() {
   runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (context) => UserNotifier())
-      ],
-      child: const MyApp(),
+    const ProviderScope(
+      child: MyApp(),
     ),
   );
 }
 
-class MyApp extends StatefulWidget {
-  // final Stream<dynamic>? stream;
-  const MyApp({super.key,});
+class MyApp extends ConsumerStatefulWidget {
+  const MyApp({
+    super.key,
+  });
 
   @override
-  State<MyApp> createState() => _MyAppState();
+  ConsumerState<MyApp> createState() => _MyAppState();
 }
 
-class _MyAppState extends State<MyApp> {
+class _MyAppState extends ConsumerState<MyApp> {
   final AuthService authService = AuthService();
 
   @override
   void initState() {
     super.initState();
-    authService.getUserDetails(context);
+    authService.getUserDetails(context, ref);
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
@@ -82,13 +82,10 @@ class _MyAppState extends State<MyApp> {
                 visualDensity: FlexColorScheme.comfortablePlatformDensity,
                 swapLegacyOnMaterial3: true,
               ).copyWith(
-                brightness: Brightness.light,
-                scaffoldBackgroundColor: Colors.white,
-                appBarTheme: const AppBarTheme(
-                  backgroundColor: lbackgroundColor,
-                  elevation: 0
-                )
-              ),
+                  brightness: Brightness.light,
+                  scaffoldBackgroundColor: Colors.white,
+                  appBarTheme: const AppBarTheme(
+                      backgroundColor: lbackgroundColor, elevation: 0)),
               darkTheme: FlexThemeData.dark(
                 primary: dprimary,
                 onPrimary: donPrimary,
@@ -126,21 +123,18 @@ class _MyAppState extends State<MyApp> {
                 fontFamily: GoogleFonts.roboto().fontFamily,
                 tabBarStyle: FlexTabBarStyle.forBackground,
               ).copyWith(
-                brightness: Brightness.dark,
-                scaffoldBackgroundColor: dscaffoldBackgroundColor,
-                appBarTheme: const AppBarTheme(
-                  backgroundColor: dbackgroundColor,
-                  elevation: 0
-                )
-              ),
+                  brightness: Brightness.dark,
+                  scaffoldBackgroundColor: dscaffoldBackgroundColor,
+                  appBarTheme: const AppBarTheme(
+                      backgroundColor: dbackgroundColor, elevation: 0)),
               themeMode: ThemeMode.system,
-              onGenerateRoute: ((settings) => onGenerateRoute(settings)),
+              onGenerateRoute: (settings) => onGenerateRoute(settings),
               /*If Token is not empty, it means we have saved the token and can go to app bottomNav Page.
-              Else w e go to SignupPage*/
-              home: Provider.of<UserNotifier>(context).user.token.isNotEmpty
-                  ? const MobileScreen()
-                  : const LoginPage()
-            );
+              Else we go to SignupPage*/
+              home: ref.watch(userChangedNotifierProvider).user.token.isNotEmpty
+                  ? const ScreenLayoutDimension(
+                      webScreen: WebScreen(), mobileScreen: MobileScreen())
+                  : const RegisterPage());
         });
   }
 }

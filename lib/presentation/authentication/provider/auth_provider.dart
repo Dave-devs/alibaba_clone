@@ -1,10 +1,10 @@
 import 'package:alibaba_clone/model/user_model.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-// final userChangeNotifierProvider = ChangeNotifierProvider((ref) => UserNotifier());
+final userChangedNotifierProvider = ChangeNotifierProvider((ref) => UserNotifier());
 
-class UserNotifier extends ChangeNotifier{
+class UserNotifier extends ChangeNotifier {
   User _user = const User(
     id: '',
     name: '',
@@ -19,11 +19,6 @@ class UserNotifier extends ChangeNotifier{
 
   void setUser(String user) {
     _user = User.fromJson(user);
-    notifyListeners();
-  }
-
-  void setUserFromModel(User user) {
-    _user = user;
     notifyListeners();
   }
 }

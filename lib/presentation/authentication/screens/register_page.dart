@@ -6,38 +6,32 @@ import 'package:alibaba_clone/presentation/authentication/widget/have_acct.dart'
 import 'package:alibaba_clone/presentation/authentication/widget/top_row_text.dart';
 import 'package:alibaba_clone/services/auth_service.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class RegisterPage extends StatefulWidget {
+class RegisterPage extends ConsumerStatefulWidget {
   static const String routeName = '/register_page';
   const RegisterPage({super.key});
 
   @override
-  State<RegisterPage> createState() => _RegisterPageState();
+  ConsumerState<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _RegisterPageState extends State<RegisterPage> {
+class _RegisterPageState extends ConsumerState<RegisterPage> {
   final _signUpFormKey = GlobalKey<FormState>();
   final TextEditingController _nameCont = TextEditingController();
   final TextEditingController _emailCont = TextEditingController();
   final TextEditingController _passwordCont = TextEditingController();
   final AuthService authService = AuthService();
-  late bool isLoading;
 
-  void signUpUser() {
-    setState(() {
-      isLoading = true;
-    });
-
+  void signUpUser() {    
     authService.signupUser(
+      ref: ref,
       context: context,
       name: _nameCont.text,
       email: _emailCont.text,
       password: _passwordCont.text
     );
-    setState(() {
-      isLoading = false;
-    });
   }
 
   @override

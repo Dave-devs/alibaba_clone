@@ -15,11 +15,11 @@ authRouter.post('/api/signup', async (req, res) => {
         //Validation on the server side(If passed email already exist).
         const existingUser = await User.findOne({email: email});
         if(existingUser) {
-            return res.status(400).json({msg: "User with same email already exist."})
+            return res.status(400).json({msg: "User with same email already exist!"})
         }
 
         //Secure password with bcrypt.js
-        const hashPassword = await bcryptjs.hash(password, 8);
+        const hashPassword = await bcryptjs.hash(password, 10);
 
         //Save data to database
         let user = new User({
@@ -43,14 +43,14 @@ authRouter.post('/api/signin', async (req, res) => {
         //Get user data to signin
         const {email, password} = req.body;
 
-        //Validations
+        //(Validations)
         //Validate if supplied email is present in users DB or else
         const user = await User.findOne({email: email});
         if(!user) {
             return res.status(400).json({msg: "User with email does not exist!"});
         }
 
-        //Validate if supplied password matched with one in users DB
+        //Validate if supplied password matched with the hashed one in user DB
         const isMatched = await bcryptjs.compare(password, user.password);
         if(!isMatched) {
             return res.status(400).json({msg: "Password does not match!"});
@@ -58,9 +58,9 @@ authRouter.post('/api/signin', async (req, res) => {
 
         /*We create a Json Web Token if above validations are true
          to get a special token as our access card to do anything within the application.*/
-        const token = jwt.sign({ id: user._id }, 'passwordKey');
+        const token = jwt.sign({id: user._id}, 'passwordKey');
         //Save the data to DB
-        res.json({ token, ...user._doc });
+        res.json({token, ...user._doc}); //Object distructuring
     } catch (error) {
         res.status(500).json({error: error.message});
     }
@@ -74,11 +74,13 @@ authRouter.post('/api/signin', async (req, res) => {
 authRouter.post('/tokenisvalid', async (req, res) => {
     try {
         //Check if the token is present. If it is not, we return False.
-        const token = req.header('x-auth-token');
+        const token = req.header("x-auth-token");
+        //If token is empty return false
         if(!token) return res.json(false);
 
         //Check if the token is verified. If it is not, we return False.
-        const isVerified = jwt.verify(token, 'passwordKey');
+        const isVerified = jwt.verify(token, "passwordKey");
+        //If token is not verified return false
         if(!isVerified) return res.json(false);
 
         /**NOTE: If the token is present and has been verified, we find user with the token */
@@ -97,7 +99,7 @@ authRouter.post('/tokenisvalid', async (req, res) => {
 //GET USER DETAILS HERE
 authRouter.get('/', auth, async (req, res) => {
     const user = await User.findById(req.user);
-    res.json({...user._doc, token: req.token});
+    res.json({ ...user._doc, token: req.token });
 });
 
 

@@ -6,43 +6,38 @@ import 'package:alibaba_clone/presentation/authentication/widget/have_acct.dart'
 import 'package:alibaba_clone/presentation/authentication/widget/top_row_text.dart';
 import 'package:alibaba_clone/services/auth_service.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class LoginPage extends StatefulWidget {
+class LoginPage extends ConsumerStatefulWidget {
   static const String routeName = '/login_page';
   const LoginPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  ConsumerState<LoginPage> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginPageState extends ConsumerState<LoginPage> {
   final _signInFormKey = GlobalKey<FormState>();
-  final TextEditingController emailCont = TextEditingController();
-  final TextEditingController passwordCont = TextEditingController();
+  final TextEditingController _emailCont = TextEditingController();
+  final TextEditingController _passwordCont = TextEditingController();
   final AuthService authService = AuthService();
-  late bool isLoading;
 
 
   void signInUser() {
-    setState(() {
-      isLoading = true;
-    });
     authService.signinUser(
+      ref: ref,
       context: context,
-      email: emailCont.text,
-      password: passwordCont.text
+      email: _emailCont.text,
+      password: _passwordCont.text
     );
-    setState(() {
-      isLoading = false;
-    });
   }
 
   @override
   void dispose() {
     super.dispose();
-    emailCont.dispose();
-    passwordCont.dispose();
+    _emailCont.dispose();
+    _passwordCont.dispose();
   }
 
   @override
@@ -82,7 +77,7 @@ class _LoginPageState extends State<LoginPage> {
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 15.w),
                       child: ReusableText(
-                        controller: emailCont,
+                        controller: _emailCont,
                         hintText: 'johndoe@gmail.com',
                         obscureText: false,
                         maxLines: 1,
@@ -97,7 +92,7 @@ class _LoginPageState extends State<LoginPage> {
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 15.w),
                       child: ReusableText(
-                        controller: passwordCont,
+                        controller: _passwordCont,
                         hintText: 'password',
                         obscureText: true,
                         maxLines: 1,

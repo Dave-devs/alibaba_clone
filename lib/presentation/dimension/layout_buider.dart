@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ScreenLayoutDimension extends StatefulWidget {
+  static const String routeName = '/screenLayoutDimension';
   final Widget webScreen, mobileScreen;
   const ScreenLayoutDimension({super.key, required this.webScreen, required this.mobileScreen});
 
