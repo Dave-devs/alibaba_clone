@@ -32,11 +32,13 @@ class AuthService {
       );
 
       //Connect with auth signup server and add user data to it
-      http.Response response = await http.post(Uri.parse('$ip/api/signup'),
-          body: user.toJson(),
-          headers: <String, String>{
-            'Content-Type': 'application/json; charset=UTF-8',
-          });
+      http.Response response = await http.post(
+        Uri.parse('$ip/api/signup'),
+        body: user.toJson(),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        }
+      );
 
       //Handle any possible error and show it
       httpErrorHandler(
@@ -128,9 +130,8 @@ class AuthService {
           },
         );
 
-        // var userProvider = Provider.of<UserNotifier>(context, listen: false);
-        final userProvider = ref.read(userChangedNotifierProvider);
-        userProvider.setUser(userRes.body);
+        ref.read(userChangedNotifierProvider).setUser(userRes.body);
+        // userProvider.setUser(userRes.body);
       }
     } catch (e) {
       flutterToast(e.toString());

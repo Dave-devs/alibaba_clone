@@ -1,6 +1,4 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-
 import 'package:alibaba_clone/constants/palette.dart';
 
 class ReusableText extends StatelessWidget {
@@ -91,15 +89,15 @@ class ReusableText extends StatelessWidget {
         hoverColor: hoverColor,
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(4),
-          borderSide: const BorderSide(color: lerror)
+          borderSide: BorderSide(color: flexSchemeLight.error)
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(4),
-          borderSide: const BorderSide(color: lprimaryContainer)
+          borderSide: BorderSide(color: flexSchemeLight.primaryContainer)
         ),
         focusedErrorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(4),
-          borderSide: const BorderSide(color: lerror)
+          borderSide: BorderSide(color: flexSchemeLight.errorContainer)
         ),
         disabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(4),
@@ -107,11 +105,11 @@ class ReusableText extends StatelessWidget {
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(4),
-          borderSide: const BorderSide(color: lprimary)
+          borderSide: BorderSide(color: flexSchemeLight.tertiaryContainer)
         ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(4),
-          borderSide: const BorderSide(color: lprimary)
+          borderSide: BorderSide(color: flexSchemeLight.primary)
         ),
       ),
     );

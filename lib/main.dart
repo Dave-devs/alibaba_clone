@@ -13,17 +13,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void main() {
-  runApp(
-    const ProviderScope(
-      child: MyApp(),
-    ),
+  runApp(const ProviderScope(child: MyApp(),),
   );
 }
 
 class MyApp extends ConsumerStatefulWidget {
-  const MyApp({
-    super.key,
-  });
+  const MyApp({super.key,});
 
   @override
   ConsumerState<MyApp> createState() => _MyAppState();
@@ -34,8 +29,8 @@ class _MyAppState extends ConsumerState<MyApp> {
 
   @override
   void initState() {
-    super.initState();
     authService.getUserDetails(context, ref);
+    super.initState();
   }
 
   @override
@@ -50,25 +45,7 @@ class _MyAppState extends ConsumerState<MyApp> {
               debugShowCheckedModeBanner: false,
               theme: FlexThemeData.light(
                 useMaterial3: true,
-                primary: lprimary,
-                onPrimary: lonPrimary,
-                primaryContainer: lprimaryContainer,
-                onPrimaryContainer: lonPrimaryContainer,
-                secondary: lsecondary,
-                onSecondary: lonSecondary,
-                secondaryContainer: lsecondaryContainer,
-                onSecondaryContainer: lonSecondaryContainer,
-                tertiary: ltertiary,
-                onTertiary: lonTertiary,
-                tertiaryContainer: ltertiaryContainer,
-                onTertiaryContainer: lonTertiaryContainer,
-                error: lerror,
-                onError: lonError,
-                background: lbackground,
-                onBackground: lonBackground,
-                surface: lsurface,
-                onSurface: lonSurface,
-                surfaceTint: lsurfaceTint,
+                platform: TargetPlatform.android,
                 surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
                 blendLevel: 7,
                 subThemesData: const FlexSubThemesData(
@@ -80,32 +57,17 @@ class _MyAppState extends ConsumerState<MyApp> {
                   useInputDecoratorThemeInDialogs: true,
                 ),
                 visualDensity: FlexColorScheme.comfortablePlatformDensity,
+                fontFamily: GoogleFonts.roboto().fontFamily,
                 swapLegacyOnMaterial3: true,
+                scheme: FlexScheme.red,
+                colorScheme: flexSchemeLight
               ).copyWith(
-                  brightness: Brightness.light,
-                  scaffoldBackgroundColor: Colors.white,
-                  appBarTheme: const AppBarTheme(
-                      backgroundColor: lbackgroundColor, elevation: 0)),
+                scaffoldBackgroundColor: flexSchemeLight.background,
+                appBarTheme: const AppBarTheme(backgroundColor: whyt, elevation: 0),
+                // ignore: deprecated_member_use
+                bottomAppBarColor: flexSchemeLight.background
+              ),
               darkTheme: FlexThemeData.dark(
-                primary: dprimary,
-                onPrimary: donPrimary,
-                primaryContainer: dprimaryContainer,
-                onPrimaryContainer: donPrimaryContainer,
-                secondary: dsecondary,
-                onSecondary: donSecondary,
-                secondaryContainer: dsecondaryContainer,
-                onSecondaryContainer: donSecondaryContainer,
-                tertiary: dtertiary,
-                onTertiary: donTertiary,
-                tertiaryContainer: dtertiaryContainer,
-                onTertiaryContainer: donTertiaryContainer,
-                error: derror,
-                onError: donError,
-                background: dbackground,
-                onBackground: donBackground,
-                surface: dsurface,
-                onSurface: donSurface,
-                surfaceTint: dsurfaceTint,
                 useMaterial3: true,
                 surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
                 blendLevel: 13,
@@ -116,25 +78,29 @@ class _MyAppState extends ConsumerState<MyApp> {
                   alignedDropdown: true,
                   useInputDecoratorThemeInDialogs: true,
                 ),
+                platform: TargetPlatform.android,
                 visualDensity: FlexColorScheme.comfortablePlatformDensity,
                 swapLegacyOnMaterial3: true,
                 appBarStyle: FlexAppBarStyle.background,
                 appBarOpacity: 0.90,
                 fontFamily: GoogleFonts.roboto().fontFamily,
                 tabBarStyle: FlexTabBarStyle.forBackground,
+                scheme: FlexScheme.red,
+                colorScheme: flexSchemeDark
               ).copyWith(
-                  brightness: Brightness.dark,
-                  scaffoldBackgroundColor: dscaffoldBackgroundColor,
-                  appBarTheme: const AppBarTheme(
-                      backgroundColor: dbackgroundColor, elevation: 0)),
+                scaffoldBackgroundColor: flexSchemeDark.background,
+                appBarTheme: const AppBarTheme(backgroundColor: blak, elevation: 0),
+                // ignore: deprecated_member_use
+                bottomAppBarColor: flexSchemeDark.background
+              ),
               themeMode: ThemeMode.system,
               onGenerateRoute: (settings) => onGenerateRoute(settings),
               /*If Token is not empty, it means we have saved the token and can go to app bottomNav Page.
               Else we go to SignupPage*/
-              home: ref.watch(userChangedNotifierProvider).user.token.isNotEmpty
-                  ? const ScreenLayoutDimension(
-                      webScreen: WebScreen(), mobileScreen: MobileScreen())
-                  : const RegisterPage());
+              home: ref.watch(userChangedNotifierProvider).user.token.isNotEmpty ?
+                const ScreenLayoutDimension(webScreen: WebScreen(), mobileScreen: MobileScreen()) :
+                const RegisterPage()
+            );
         });
   }
 }

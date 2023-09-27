@@ -49,7 +49,6 @@ class _MobileScreenState extends State<MobileScreen> {
       bottomNavigationBar: CupertinoTabBar(
         onTap: onTap,
         currentIndex: _pageIndex,
-        backgroundColor: blak,
         iconSize: iconSize,
         height: bottomBarHeight,
         activeColor: blak,
@@ -59,7 +58,7 @@ class _MobileScreenState extends State<MobileScreen> {
               width: w,
               height: h,
               decoration: BoxDecoration(
-                color: dprimary,
+                color: flexSchemeLight.primary,
                 borderRadius: BorderRadius.circular(bottomBarRadius)
               ),
               child: const Icon(Icons.home),
@@ -72,7 +71,7 @@ class _MobileScreenState extends State<MobileScreen> {
               width: w,
               height: h,
               decoration: BoxDecoration(
-                color: dprimary,
+                color:flexSchemeLight.primary,
                 borderRadius: BorderRadius.circular(bottomBarRadius)
               ),
               child: const Icon(Icons.person),
@@ -87,7 +86,7 @@ class _MobileScreenState extends State<MobileScreen> {
                 width: w,
                 height: h,
                 decoration: BoxDecoration(
-                  color: dprimary,
+                  color: flexSchemeLight.primary,
                   borderRadius: BorderRadius.circular(bottomBarRadius)
                 ),
                 child: const Icon(Icons.shopping_cart),

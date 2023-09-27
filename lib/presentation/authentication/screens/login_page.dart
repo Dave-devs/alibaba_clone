@@ -23,7 +23,6 @@ class _LoginPageState extends ConsumerState<LoginPage> {
   final TextEditingController _passwordCont = TextEditingController();
   final AuthService authService = AuthService();
 
-
   void signInUser() {
     authService.signinUser(
       ref: ref,
