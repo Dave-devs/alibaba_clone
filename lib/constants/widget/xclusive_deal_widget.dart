@@ -20,11 +20,11 @@ class XclusiveDeal extends StatelessWidget {
     return SizedBox(
       width: MediaQuery.of(context).size.width,
       child: Column(
-        crossAxisAlignment:  CrossAxisAlignment.start,
+        crossAxisAlignment:  CrossAxisAlignment.center,
         children: [
           Container(
             width: MediaQuery.of(context).size.width,
-            height: 200.h,
+            height: 230.h,
             padding: EdgeInsets.symmetric(horizontal: 10.w),
             decoration: const BoxDecoration(
               image: DecorationImage(
@@ -33,15 +33,17 @@ class XclusiveDeal extends StatelessWidget {
               ),
             ),
           ),
-          Padding(
-            padding: EdgeInsets.only(left: 10.w, top: 5.h),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 10.w).copyWith(top: 4.h),
+            alignment: Alignment.topLeft,
             child: Text(
               priceTag,
               style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w600),
             ),
           ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10.w).copyWith(top: 2.h),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 10.w),
+            alignment: Alignment.topLeft,
             child: Text(
               decs,
               overflow: TextOverflow.ellipsis,
