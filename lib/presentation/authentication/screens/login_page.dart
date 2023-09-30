@@ -25,11 +25,10 @@ class _LoginPageState extends ConsumerState<LoginPage> {
 
   void signInUser() {
     authService.signinUser(
-      ref: ref,
-      context: context,
-      email: _emailCont.text,
-      password: _passwordCont.text
-    );
+        ref: ref,
+        context: context,
+        email: _emailCont.text,
+        password: _passwordCont.text);
   }
 
   @override
@@ -42,134 +41,146 @@ class _LoginPageState extends ConsumerState<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: const Text('Login Screen', style: TextStyle(fontWeight: FontWeight.w500),),
-        centerTitle: true,
-      ),
-      body: ListView(
-        children: [
-          SizedBox(height: 100.h,),
-          Card(
-          margin: EdgeInsets.symmetric(horizontal: 10.w),
-          elevation: 2,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(height: 30.h,),
-              //Column Text
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 15.w),
-                child: const TopRowText(
-                  text1: 'Back to shopping convinience',
-                  text2: 'Choose one of the options to go'
-                ),
-              ),
-              
-              Form(
-                key: _signInFormKey,
-                child: Column(
-                  children: [
-                    SizedBox(height: 25.h,),
-              
-                    //Email TextField
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 15.w),
-                      child: ReusableText(
-                        controller: _emailCont,
-                        hintText: 'johndoe@gmail.com',
-                        obscureText: false,
-                        maxLines: 1,
-                        contentPadding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 10.h),
-                        hintStyle: TextStyle(fontSize: 10.sp, fontWeight: FontWeight.w200),
-                      ),
-                    ),
-              
-                    SizedBox(height: 10.h,),
-              
-                    //Password TextField
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 15.w),
-                      child: ReusableText(
-                        controller: _passwordCont,
-                        hintText: 'password',
-                        obscureText: true,
-                        maxLines: 1,
-                        contentPadding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 10.h),
-                        hintStyle: TextStyle(fontSize: 10.sp, fontWeight: FontWeight.w200),
-                      ),
-                    ),
-              
-                    SizedBox(height: 25.h,),
-              
-                    //Or login with alternative and Don't have an account? row
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 15.w),
-                      child: HaveAcctRow(
-                        text1: 'Or continue with',
-                        text2: "Don't have account?",
-                        onTap: () {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(builder: (context) => const RegisterPage())
-                          );
-                        }
-                      ),
-                    ),
-
-                    SizedBox(height: 25.h,),
-              
-                    //Alternatives rows
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        AltItem(
-                          onTap: () {
-
-                          },
-                          item: 'assets/images/google_logo.png'
-                        ),
-                        AltItem(
-                          onTap: () {
-
-                          },
-                          item: 'assets/images/facebook_logo.png'
-                        ),
-                        AltItem(
-                          onTap: () {
-
-                          },
-                          item: 'assets/images/apple_logo.png'
-                        ),
-                      ],
-                    ),
-              
-                    SizedBox(height: 25.h,),
-              
-                    //Login Button
-                    Center(
-                      child: ReusableButton(
-                        text: 'Log in',
-                        style: TextStyle(fontWeight: FontWeight.w400, fontSize: 14.sp),
-                        minimumSize: Size(200.w, 40.h),
-                        onPressed: () {
-                          if(_signInFormKey.currentState!.validate()) {
-                            signInUser();
-                          }
-                        },
-                      ),
-                    ),
-                  ]
-                )
-              ),
-              
-              SizedBox(height: 30.h,),
-            ],
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          title: const Text(
+            'Login Screen',
+            style: TextStyle(fontWeight: FontWeight.w500),
           ),
+          centerTitle: true,
         ),
-        SizedBox(height: 100.h,),
-        ],
-      )
-    );
+        body: ListView(
+          children: [
+            SizedBox(
+              height: 100.h,
+            ),
+            Card(
+              margin: EdgeInsets.symmetric(horizontal: 10.w),
+              elevation: 2,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    height: 30.h,
+                  ),
+                  //Column Text
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 15.w),
+                    child: const TopRowText(
+                        text1: 'Back to shopping convinience',
+                        text2: 'Choose one of the options to go'),
+                  ),
+
+                  Form(
+                      key: _signInFormKey,
+                      child: Column(children: [
+                        SizedBox(
+                          height: 25.h,
+                        ),
+
+                        //Email TextField
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 15.w),
+                          child: ReusableTextfield(
+                            controller: _emailCont,
+                            hintText: 'johndoe@gmail.com',
+                            obscureText: false,
+                            maxLines: 1,
+                            contentPadding: EdgeInsets.symmetric(
+                                horizontal: 8.w, vertical: 10.h),
+                            hintStyle: TextStyle(
+                                fontSize: 10.sp, fontWeight: FontWeight.w200),
+                          ),
+                        ),
+
+                        SizedBox(
+                          height: 10.h,
+                        ),
+
+                        //Password TextField
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 15.w),
+                          child: ReusableTextfield(
+                            controller: _passwordCont,
+                            hintText: 'password',
+                            obscureText: true,
+                            maxLines: 1,
+                            contentPadding: EdgeInsets.symmetric(
+                                horizontal: 8.w, vertical: 10.h),
+                            hintStyle: TextStyle(
+                                fontSize: 10.sp, fontWeight: FontWeight.w200),
+                          ),
+                        ),
+
+                        SizedBox(
+                          height: 25.h,
+                        ),
+
+                        //Or login with alternative and Don't have an account? row
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 15.w),
+                          child: HaveAcctRow(
+                              text1: 'Or continue with',
+                              text2: "Don't have account?",
+                              onTap: () {
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const RegisterPage()));
+                              }),
+                        ),
+
+                        SizedBox(
+                          height: 25.h,
+                        ),
+
+                        //Alternatives rows
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            AltItem(
+                                onTap: () {},
+                                item: 'assets/images/google_logo.png'),
+                            AltItem(
+                                onTap: () {},
+                                item: 'assets/images/facebook_logo.png'),
+                            AltItem(
+                                onTap: () {},
+                                item: 'assets/images/apple_logo.png'),
+                          ],
+                        ),
+
+                        SizedBox(
+                          height: 25.h,
+                        ),
+
+                        //Login Button
+                        Center(
+                          child: ReusableButton(
+                            text: 'Log in',
+                            style: TextStyle(
+                                fontWeight: FontWeight.w400, fontSize: 14.sp),
+                            minimumSize: Size(200.w, 40.h),
+                            onPressed: () {
+                              if (_signInFormKey.currentState!.validate()) {
+                                signInUser();
+                              }
+                            },
+                          ),
+                        ),
+                      ])),
+
+                  SizedBox(
+                    height: 30.h,
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 100.h,
+            ),
+          ],
+        ));
   }
 }

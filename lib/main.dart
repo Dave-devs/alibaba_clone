@@ -98,9 +98,14 @@ class _MyAppState extends ConsumerState<MyApp> {
               /*If Token is not empty, it means we have saved the token and can go to app bottomNav Page.
               Else we go to SignupPage*/
               home: ref.watch(userChangedNotifierProvider).user.token.isNotEmpty ?
-                const ScreenLayoutDimension(webScreen: WebScreen(), mobileScreen: MobileScreen()) :
-                const RegisterPage()
+               const ScreenLayoutDimension(webScreen: WebScreen(), mobileScreen: MobileScreen()) : 
+               const RegisterPage()
             );
         });
   }
 }
+
+
+// ref.watch(userChangedNotifierProvider).user.token.isNotEmpty ?
+//                 const ScreenLayoutDimension(webScreen: WebScreen(), mobileScreen: MobileScreen()) :
+//                 const RegisterPage()

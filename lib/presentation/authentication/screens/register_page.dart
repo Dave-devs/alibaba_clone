@@ -24,14 +24,13 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
   final TextEditingController _passwordCont = TextEditingController();
   final AuthService authService = AuthService();
 
-  void signUpUser() {    
+  void signUpUser() {
     authService.signupUser(
-      ref: ref,
-      context: context,
-      name: _nameCont.text,
-      email: _emailCont.text,
-      password: _passwordCont.text
-    );
+        ref: ref,
+        context: context,
+        name: _nameCont.text,
+        email: _emailCont.text,
+        password: _passwordCont.text);
   }
 
   @override
@@ -55,146 +54,160 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
         ),
         body: ListView(
           children: [
-            SizedBox(height: 100.h,),
+            SizedBox(
+              height: 100.h,
+            ),
             Center(
               child: Card(
-                margin: EdgeInsets.symmetric(horizontal: 10.w,),
+                margin: EdgeInsets.symmetric(
+                  horizontal: 10.w,
+                ),
                 elevation: 2,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-
-                    SizedBox(height: 30.h,),
+                    SizedBox(
+                      height: 30.h,
+                    ),
 
                     //Column Text
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 15.w),
                       child: const TopRowText(
-                        text1: 'Back to shopping convinience',
-                        text2: 'Choose one of the options to go'
-                      ),
+                          text1: 'Back to shopping convinience',
+                          text2: 'Choose one of the options to go'),
                     ),
 
                     Form(
-                      key: _signUpFormKey,
-                      child: Column(
-                        children: [
-                          SizedBox(height: 25.h,),
-                    
+                        key: _signUpFormKey,
+                        child: Column(children: [
+                          SizedBox(
+                            height: 25.h,
+                          ),
+
                           //Email TextField
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 15.w),
-                            child: ReusableText(
+                            child: ReusableTextfield(
                               controller: _nameCont,
                               hintText: 'johndoe',
                               obscureText: false,
                               maxLines: 1,
-                              contentPadding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 10.h),
-                              hintStyle: TextStyle(fontSize: 10.sp, fontWeight: FontWeight.w200),
+                              contentPadding: EdgeInsets.symmetric(
+                                  horizontal: 8.w, vertical: 10.h),
+                              hintStyle: TextStyle(
+                                  fontSize: 10.sp, fontWeight: FontWeight.w200),
                             ),
                           ),
-                    
-                          SizedBox(height: 10.h,),
-                    
+
+                          SizedBox(
+                            height: 10.h,
+                          ),
+
                           //Email TextField
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 15.w),
-                            child: ReusableText(
+                            child: ReusableTextfield(
                               controller: _emailCont,
                               hintText: 'johndoe@gmail.com',
                               obscureText: false,
                               maxLines: 1,
-                              contentPadding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 10.h),
-                              hintStyle: TextStyle(fontSize: 10.sp, fontWeight: FontWeight.w200),
+                              contentPadding: EdgeInsets.symmetric(
+                                  horizontal: 8.w, vertical: 10.h),
+                              hintStyle: TextStyle(
+                                  fontSize: 10.sp, fontWeight: FontWeight.w200),
                             ),
                           ),
-                    
-                          SizedBox(height: 10.h,),
-                    
+
+                          SizedBox(
+                            height: 10.h,
+                          ),
+
                           //Password TextField
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 15.w),
-                            child: ReusableText(
+                            child: ReusableTextfield(
                               controller: _passwordCont,
                               hintText: 'password',
                               obscureText: true,
                               maxLines: 1,
-                              contentPadding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 10.h),
-                              hintStyle: TextStyle(fontSize: 10.sp, fontWeight: FontWeight.w200),
+                              contentPadding: EdgeInsets.symmetric(
+                                  horizontal: 8.w, vertical: 10.h),
+                              hintStyle: TextStyle(
+                                  fontSize: 10.sp, fontWeight: FontWeight.w200),
                             ),
                           ),
-                    
-                          SizedBox(height: 25.h,),
-                    
+
+                          SizedBox(
+                            height: 25.h,
+                          ),
+
                           //Or login with alternative and Don't have an account? row
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 15.w),
                             child: HaveAcctRow(
-                              text1: 'Or continue with',
-                              text2: "Already have an account?",
-                              onTap: () {
-                                Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(builder: (context) => const LoginPage())
-                                );
-                              }
-                            ),
+                                text1: 'Or continue with',
+                                text2: "Already have an account?",
+                                onTap: () {
+                                  Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const LoginPage()));
+                                }),
                           ),
 
-                          SizedBox(height: 25.h,),
-                    
+                          SizedBox(
+                            height: 25.h,
+                          ),
+
                           //Alternatives rows
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               AltItem(
-                                onTap: () {
-
-                                },
-                                item: 'assets/images/google_logo.png'
-                              ),
+                                  onTap: () {},
+                                  item: 'assets/images/google_logo.png'),
                               AltItem(
-                                onTap: () {
-
-                                },
-                                item: 'assets/images/facebook_logo.png'
-                              ),
+                                  onTap: () {},
+                                  item: 'assets/images/facebook_logo.png'),
                               AltItem(
-                                onTap: () {
-
-                                },
-                                item: 'assets/images/apple_logo.png'
-                              )
+                                  onTap: () {},
+                                  item: 'assets/images/apple_logo.png')
                             ],
                           ),
-                    
-                          SizedBox(height: 25.h,),
-                    
+
+                          SizedBox(
+                            height: 25.h,
+                          ),
+
                           //Login Button
                           Center(
                             child: ReusableButton(
                               text: 'Register',
-                              style: TextStyle(fontWeight: FontWeight.w400, fontSize: 14.sp),
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w400, fontSize: 14.sp),
                               minimumSize: Size(200.w, 40.h),
                               onPressed: () {
-                                if(_signUpFormKey.currentState!.validate()) {
+                                if (_signUpFormKey.currentState!.validate()) {
                                   signUpUser();
                                 }
                               },
                             ),
                           ),
-                        ]
-                      )
+                        ])),
+
+                    SizedBox(
+                      height: 30.h,
                     ),
-                    
-                    SizedBox(height: 30.h,),
                   ],
                 ),
               ),
             ),
-            SizedBox(height: 100.h,),
+            SizedBox(
+              height: 100.h,
+            ),
           ],
-        )
-      );
-    }
+        ));
+  }
 }

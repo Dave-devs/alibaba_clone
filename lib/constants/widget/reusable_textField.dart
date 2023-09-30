@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:alibaba_clone/constants/palette.dart';
 
-class ReusableText extends StatelessWidget {
+class ReusableTextfield extends StatelessWidget {
   final TextEditingController? controller;
   final String? hintText;
   final TextStyle? hintStyle;
@@ -27,7 +27,8 @@ class ReusableText extends StatelessWidget {
   final int? maxLines;
   final void Function(String)? onFieldSubmitted;
   final void Function(String)? onChanged;
-  const ReusableText({super.key, 
+  const ReusableTextfield({
+    super.key,
     this.controller,
     this.hintText,
     this.hintStyle,
@@ -63,7 +64,7 @@ class ReusableText extends StatelessWidget {
       onChanged: onChanged,
       onFieldSubmitted: onFieldSubmitted,
       validator: (String? value) {
-        if(value == null || value.isEmpty) {
+        if (value == null || value.isEmpty) {
           return "Enter $hintText";
         }
         return null;
@@ -88,29 +89,23 @@ class ReusableText extends StatelessWidget {
         focusColor: focusColor,
         hoverColor: hoverColor,
         errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(4),
-          borderSide: BorderSide(color: flexSchemeLight.error)
-        ),
+            borderRadius: BorderRadius.circular(4),
+            borderSide: BorderSide(color: flexSchemeLight.error)),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(4),
-          borderSide: BorderSide(color: flexSchemeLight.primaryContainer)
-        ),
+            borderRadius: BorderRadius.circular(4),
+            borderSide: BorderSide(color: flexSchemeLight.primaryContainer)),
         focusedErrorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(4),
-          borderSide: BorderSide(color: flexSchemeLight.errorContainer)
-        ),
+            borderRadius: BorderRadius.circular(4),
+            borderSide: BorderSide(color: flexSchemeLight.errorContainer)),
         disabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(4),
-          borderSide: const BorderSide(color: Colors.grey)
-        ),
+            borderRadius: BorderRadius.circular(4),
+            borderSide: const BorderSide(color: Colors.grey)),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(4),
-          borderSide: BorderSide(color: flexSchemeLight.tertiaryContainer)
-        ),
+            borderRadius: BorderRadius.circular(4),
+            borderSide: BorderSide(color: flexSchemeLight.tertiaryContainer)),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(4),
-          borderSide: BorderSide(color: flexSchemeLight.primary)
-        ),
+            borderRadius: BorderRadius.circular(4),
+            borderSide: BorderSide(color: flexSchemeLight.primary)),
       ),
     );
   }
