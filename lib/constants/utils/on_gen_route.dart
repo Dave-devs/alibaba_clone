@@ -1,3 +1,6 @@
+import 'package:alibaba_clone/admin_features/presentation/admin_dimension_layout/admin_page_dimension.dart';
+import 'package:alibaba_clone/admin_features/presentation/mobileAdminPage/mobile_admin_page.dart';
+import 'package:alibaba_clone/admin_features/presentation/webAdminPage/web_admin_page.dart';
 import 'package:alibaba_clone/presentation/authentication/screens/login_page.dart';
 import 'package:alibaba_clone/presentation/authentication/screens/register_page.dart';
 import 'package:alibaba_clone/presentation/dimension/layout_buider.dart';
@@ -36,6 +39,12 @@ Route<dynamic>? onGenerateRoute(RouteSettings routeSettings) {
       return MaterialPageRoute(
         settings: routeSettings,
         builder: (_) => const WebScreen()
+      );
+    
+    case AdminScreenLayoutDimension.routeName:
+      return MaterialPageRoute(
+        settings: routeSettings,
+        builder: (_) => const AdminScreenLayoutDimension(mobileAdminPage: MobileAdminPage(), webAdminPage: WebAdminPage(),)
       );
     
     default:
