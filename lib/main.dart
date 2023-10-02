@@ -1,6 +1,6 @@
-import 'package:alibaba_clone/admin_features/presentation/admin_dimension_layout/admin_page_dimension.dart';
-import 'package:alibaba_clone/admin_features/presentation/mobileAdminPage/mobile_admin_page.dart';
-import 'package:alibaba_clone/admin_features/presentation/webAdminPage/web_admin_page.dart';
+import 'package:alibaba_clone/presentation/admin_features/presentation/admin_dimension_layout/admin_page_dimension.dart';
+import 'package:alibaba_clone/presentation/admin_features/presentation/mobileAdminPage/mobile_admin_page.dart';
+import 'package:alibaba_clone/presentation/admin_features/presentation/webAdminPage/web_admin_page.dart';
 import 'package:alibaba_clone/constants/palette.dart';
 import 'package:alibaba_clone/constants/utils/on_gen_route.dart';
 import 'package:alibaba_clone/presentation/authentication/provider/auth_provider.dart';
@@ -100,11 +100,11 @@ class _MyAppState extends ConsumerState<MyApp> {
               onGenerateRoute: (settings) => onGenerateRoute(settings),
               /*If Token is not empty, it means we have saved the token and can go to app bottomNav Page.
               Else we go to SignupPage*/
-              home: ref.watch(userChangedNotifierProvider).user.token.isNotEmpty ? 
-                ref.watch(userChangedNotifierProvider).user.type == 'user' ?
-                const ScreenLayoutDimension(webScreen: WebScreen(), mobileScreen: MobileScreen()) : 
-                const AdminScreenLayoutDimension(mobileAdminPage: MobileAdminPage(), webAdminPage: WebAdminPage(),) :
-                const RegisterPage()
+              home: ref.watch(userChangedNotifierProvider).user.token.isNotEmpty 
+              ? ref.watch(userChangedNotifierProvider).user.type == 'user'
+              ? const ScreenLayoutDimension(webScreen: WebScreen(), mobileScreen: MobileScreen()) 
+              : const AdminScreenLayoutDimension(mobileAdminPage: MobileAdminPage(), webAdminPage: WebAdminPage(),) 
+              : const RegisterPage()
             );
         });
   }
@@ -114,3 +114,4 @@ class _MyAppState extends ConsumerState<MyApp> {
 // ref.watch(userChangedNotifierProvider).user.token.isNotEmpty ?
 //                 const ScreenLayoutDimension(webScreen: WebScreen(), mobileScreen: MobileScreen()) :
 //                 const RegisterPage()
+// => Add Admin bottom nav and shit next

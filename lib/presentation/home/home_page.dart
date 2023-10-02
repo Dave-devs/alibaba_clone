@@ -11,6 +11,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomePage extends ConsumerStatefulWidget {
+  static const String routeName = '/home_page';
   const HomePage({super.key});
 
   @override
@@ -24,13 +25,10 @@ class _HomePageState extends ConsumerState<HomePage> {
 
     return Scaffold(
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(60.h),
-          child: HomeAppBar(
-            onPressed: () {
-              
-            },
-          )
-        ),
+            preferredSize: Size.fromHeight(60.h),
+            child: HomeAppBar(
+              onPressed: () {},
+            )),
         body: ListView(
           children: [
             AddressWidget(
@@ -41,25 +39,23 @@ class _HomePageState extends ConsumerState<HomePage> {
             SizedBox(height: 10.h),
             Padding(
               padding: EdgeInsets.only(top: 6.h, left: 6.w, bottom: 6.h),
-              child: Text(
-                'Exclusive Deals',
-                style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600)
-              ),
+              child: Text('Exclusive Deals',
+                  style:
+                      TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600)),
             ),
             const XclusiveDeal(
               picPath: pic,
               priceTag: '\$ 344.44',
-              decs: 'Apple MacBook Air 2021, Phantom Blue Case with dummy text all around it.',
+              decs:
+                  'Apple MacBook Air 2021, Phantom Blue Case with dummy text all around it.',
             ),
             SizedBox(height: 10.h),
             const ProductPicsWidget(),
-
             Container(
               padding: EdgeInsets.only(left: 10.w, bottom: 10.h),
               child: const Text('Show all items'),
             )
           ],
-        )
-      );
+        ));
   }
 }

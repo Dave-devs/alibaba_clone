@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CartPage extends StatefulWidget {
+  static const String routeName = '/cart_page';
   const CartPage({super.key});
 
   @override
@@ -10,6 +11,10 @@ class CartPage extends StatefulWidget {
 class _CartPageState extends State<CartPage> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold();
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Cart Page'),
+      ),
+    );
   }
 }

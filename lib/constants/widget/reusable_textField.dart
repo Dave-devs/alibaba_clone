@@ -51,7 +51,7 @@ class ReusableTextfield extends StatelessWidget {
     this.textInputAction,
     this.style,
     required this.obscureText,
-    this.maxLines,
+    this.maxLines = 1,
     this.onFieldSubmitted,
     this.onChanged,
   });
@@ -74,7 +74,6 @@ class ReusableTextfield extends StatelessWidget {
       style: style,
       obscureText: obscureText,
       autocorrect: false,
-      minLines: 1,
       maxLines: maxLines,
       decoration: InputDecoration(
         hintText: hintText,

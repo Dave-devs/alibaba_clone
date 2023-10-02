@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AnalyticPage extends StatefulWidget {
+  static const String routeName = '/analytic_page';
   const AnalyticPage({ Key? key }) : super(key: key);
 
   @override

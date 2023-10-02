@@ -1,6 +1,9 @@
+import 'package:alibaba_clone/presentation/admin_features/presentation/analytic/analytic_page.dart';
+import 'package:alibaba_clone/presentation/admin_features/presentation/products/products_page.dart';
 import 'package:alibaba_clone/presentation/cart/cart_page.dart';
 import 'package:alibaba_clone/presentation/home/home_page.dart';
 import 'package:alibaba_clone/presentation/profile/profile_page.dart';
+import 'package:alibaba_clone/presentation/admin_features/presentation/orders/orders_page.dart';
 
 const double radius = 16; //8
 const double bottomBarRadius = 30;
@@ -13,6 +16,12 @@ const pageList = [
   HomePage(),
   ProfilePage(),
   CartPage(),
+];
+
+const adminPageList = [
+  ProductsPage(),
+  AnalyticPage(),
+  OrdersPage(),
 ];
 
 const picHolder = [
@@ -54,4 +63,5 @@ const couruselImages = [
   'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSy5OJSdPNVpREFk9EbYlG1sCkGuV588M_cyw&usqp=CAU',
 ];
 
-const pic = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSy5OJSdPNVpREFk9EbYlG1sCkGuV588M_cyw&usqp=CAU';
+const pic =
+    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSy5OJSdPNVpREFk9EbYlG1sCkGuV588M_cyw&usqp=CAU';
