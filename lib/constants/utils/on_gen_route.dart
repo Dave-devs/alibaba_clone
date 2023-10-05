@@ -64,6 +64,7 @@ Route<dynamic>? onGenerateRoute(RouteSettings routeSettings) {
     case AnalyticPage.routeName:
       return MaterialPageRoute(settings: routeSettings, builder: (_) => const AnalyticPage());
 
+    // ignore: unreachable_switch_case
     case OrdersPage.routeName:
       return MaterialPageRoute(settings: routeSettings, builder: (_) => const OrdersPage());
 
