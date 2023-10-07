@@ -1,34 +1,39 @@
 import 'dart:io';
+import 'package:alibaba_clone/presentation/admin_features/services/admin_services.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:alibaba_clone/constants/utils/file_picker.dart';
 import 'package:alibaba_clone/constants/widget/reusable_button.dart';
 import 'package:alibaba_clone/constants/widget/reusable_textfield.dart';
 import 'package:alibaba_clone/presentation/admin_features/presentation/add_product/widget/select_product_image.dart';
 
-class AddProductPage extends StatefulWidget {
+class AddProductPage extends ConsumerStatefulWidget {
   static const String routeName = '/add_product_page';
   const AddProductPage({Key? key}) : super(key: key);
 
   @override
-  State createState() => _AddProductPageState();
+  ConsumerState createState() => _AddProductPageState();
 }
 
-class _AddProductPageState extends State<AddProductPage> {
+class _AddProductPageState extends ConsumerState<AddProductPage> {
+  final AdminServices _adminServices = AdminServices();
   final _addProductInFormKey = GlobalKey<FormState>();
   final TextEditingController _productNameCont = TextEditingController();
   final TextEditingController _descriptionCont = TextEditingController();
   final TextEditingController _priceCont = TextEditingController();
   final TextEditingController _quantityCont = TextEditingController();
   List<File> images = [];
-  String defaultCategory = 'Phones & Tech';
+  String defaultCategory = 'Fashion & Wears';
   List<String> categoriesList = [
-    'Phones & Tech',
-    "Men's Fashion",
-    "Women's Fashion",
-    "Accessories",
-    "Baby Wears",
+    'Fashion & Wears',
+    "Phones & Telecommunication",
+    "Beauty, Health & Hair",
+    "Computer, Office & Security",
+    "Jwwelry & Watches",
+    "Home, Pets & Appliances",
+    "Bags & Shoes"
   ];
 
   onCateChanged(String? newValue) {
@@ -45,8 +50,17 @@ class _AddProductPageState extends State<AddProductPage> {
   }
 
   onSellProduct() {
-    if (_addProductInFormKey.currentState!.validate()) {
-      //Input Sell Function Here
+    if (_addProductInFormKey.currentState!.validate() && images.isNotEmpty) {
+      _adminServices.sellProducts(
+        context: context,
+        ref: ref,
+        productName: _productNameCont.text,
+        description: _descriptionCont.text,
+        category: defaultCategory,
+        quantity: double.parse(_quantityCont.text),
+        price: double.parse(_priceCont.text),
+        images: images
+      );
     }
   }
   
@@ -168,9 +182,7 @@ class _AddProductPageState extends State<AddProductPage> {
                 //Sell Button
                 ReusableButton(
                   text: 'Sell',
-                  onPressed: () {
-                    
-                  },
+                  onPressed: onSellProduct,
                   minimumSize: Size(375.w,50.h),
                 ),
 

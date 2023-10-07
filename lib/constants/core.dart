@@ -33,25 +33,33 @@ const picHolder = [
 
 const List<Map<String, String>> valuesImages = [
   {
-    'name': "Safe & Reliable Payments",
-    'image': 'https://img.icons8.com/?size=80&id=SwvDja4ryubi&format=png'
+    'name': "Fashion & Wears",
+    'image': 'https://img.icons8.com/?size=80&id=nr3bIWoY2G1H&format=png'
   },
   {
-    'name': "Money Back Guarantee",
+    'name': "Phones & Telecommunication",
     'image': 'https://img.icons8.com/?size=80&id=h3USDbkfsNWM&format=png'
   },
   {
-    'name': "24/7 Customer Service",
-    'image': 'https://img.icons8.com/?size=80&id=pP1yf7xOGzq4&format=png'
+    'name': "Beauty, Health & Hair",
+    'image': 'https://img.icons8.com/?size=80&id=98NGxToRnlUF&format=png'
   },
   {
-    'name': "Buyer Protection",
-    'image': 'https://img.icons8.com/?size=80&id=8OdwzXFjBVH2&format=png'
+    'name': "Computer, Office & Security",
+    'image': 'https://img.icons8.com/?size=80&id=ledoOw5M8qvM&format=png'
   },
   {
-    'name': "50% Black Friday Sales",
-    'image': 'https://img.icons8.com/?size=80&id=mnqCs95ap07K&format=png'
-  }
+    'name': "Jwwelry & Watches",
+    'image': 'https://img.icons8.com/?size=80&id=2nVS5Wx4ZIp8&format=png'
+  },
+  {
+    'name': "Home, Pets & Appliances",
+    'image': 'https://img.icons8.com/?size=80&id=1P5nrOCWy9A9&format=png'
+  },
+  {
+    'name': "Bags & Shoes",
+    'image': 'https://img.icons8.com/?size=80&id=ruU216B67S4I&format=png'
+  },
 ];
 
 const couruselImages = [

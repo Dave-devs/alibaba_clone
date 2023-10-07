@@ -20,7 +20,7 @@ class AuthService {
     required String password,
   }) async {
     try {
-      //Get user model instance
+      //Map user data to userModel
       User user = User(
         id: '',
         name: name,

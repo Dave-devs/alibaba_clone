@@ -161,6 +161,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.1.1"
+  cloudinary_public:
+    dependency: "direct main"
+    description:
+      name: cloudinary_public
+      sha256: "5fcb5046239bb9701c14f4207c19f272753000e16717f82721ba22d0542537d0"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.21.0"
   collection:
     dependency: transitive
     description:
@@ -241,6 +249,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.3.2"
+  dio:
+    dependency: transitive
+    description:
+      name: dio
+      sha256: "417e2a6f9d83ab396ec38ff4ea5da6c254da71e4db765ad737a42af6930140b7"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "5.3.3"
   dotted_border:
     dependency: "direct main"
     description:
@@ -313,14 +329,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.9.3+1"
-  filepicker_macos:
-    dependency: "direct main"
-    description:
-      name: filepicker_macos
-      sha256: "151c29eac9f2807650df20c2592d1ae7ee97ede999219aa40278263ad69ef5c1"
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "0.0.6"
   flex_color_scheme:
     dependency: "direct main"
     description:

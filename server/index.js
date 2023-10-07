@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 
 //Imports from moules(folders or files within our server)
 const appRouter = require('./routes/auth.js');
+const adminRouter = require('./routes/admin.js');
 const password = require("./secrets.js");
 
 //Packages Initializations
@@ -14,6 +15,7 @@ const uri = `mongodb+srv://odetundeoreoluwadavid:${password}@alibabacloneappclus
 //Middleware(for additional functionality)
 app.use(express.json());
 app.use(appRouter);
+app.use(adminRouter);
 
 //Connect to Database(MongoDB) at port 3000
 mongoose.connect(uri)
