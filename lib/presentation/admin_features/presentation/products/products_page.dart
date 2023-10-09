@@ -1,3 +1,4 @@
+import 'package:alibaba_clone/constants/widget/single_product.dart';
 import 'package:alibaba_clone/presentation/admin_features/model/product_model.dart';
 import 'package:alibaba_clone/presentation/admin_features/presentation/add_product/add_product_page.dart';
 import 'package:alibaba_clone/presentation/admin_features/services/admin_services.dart';
@@ -81,26 +82,8 @@ class _ProductsPageState extends ConsumerState<ProductsPage> {
           final productData = products![index];
             return Column(
               children: [
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 5.w),
-                  child: DecoratedBox(
-                    decoration: BoxDecoration(
-                      border: Border.all(),
-                      borderRadius: BorderRadius.circular(5),
-                      color: Colors.white,
-                    ),
-                    child: Container(
-                      height: 180.h,
-                      padding: EdgeInsets.all(15.w),
-                      child: Image.network(
-                        productData.images[0],
-                        fit: BoxFit.fitHeight,
-                        width: 180.w
-                      )
-                    )
-                  )
-                ),
-                    
+                SingleProduct(src: productData.images[0],),
+         
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [

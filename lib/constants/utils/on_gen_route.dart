@@ -5,10 +5,12 @@ import 'package:alibaba_clone/presentation/admin_features/presentation/webAdminP
 import 'package:alibaba_clone/presentation/authentication/screens/login_page.dart';
 import 'package:alibaba_clone/presentation/authentication/screens/register_page.dart';
 import 'package:alibaba_clone/presentation/cart/cart_page.dart';
+import 'package:alibaba_clone/presentation/category/category_page.dart';
 import 'package:alibaba_clone/presentation/dimension/layout_buider.dart';
 import 'package:alibaba_clone/presentation/home/home_page.dart';
 import 'package:alibaba_clone/presentation/mobile_screen/mobile_screen.dart';
 import 'package:alibaba_clone/presentation/profile/profile_page.dart';
+import 'package:alibaba_clone/presentation/search/search_page.dart';
 import 'package:alibaba_clone/presentation/web_screen/web_screen.dart';
 import 'package:alibaba_clone/presentation/admin_features/presentation/products/products_page.dart';
 import 'package:alibaba_clone/presentation/admin_features/presentation/analytic/analytic_page.dart';
@@ -27,11 +29,11 @@ Route<dynamic>? onGenerateRoute(RouteSettings routeSettings) {
 
     case ScreenLayoutDimension.routeName:
       return MaterialPageRoute(
-        settings: routeSettings, builder: (_) => const ScreenLayoutDimension(
-          webScreen: WebScreen(),
-          mobileScreen: MobileScreen(),
-        )
-      );
+          settings: routeSettings,
+          builder: (_) => const ScreenLayoutDimension(
+                webScreen: WebScreen(),
+                mobileScreen: MobileScreen(),
+              ));
 
     case MobileScreen.routeName:
       return MaterialPageRoute(
@@ -40,40 +42,64 @@ Route<dynamic>? onGenerateRoute(RouteSettings routeSettings) {
     case WebScreen.routeName:
       return MaterialPageRoute(
           settings: routeSettings, builder: (_) => const WebScreen());
-  
+
     case HomePage.routeName:
-      return MaterialPageRoute(settings: routeSettings, builder: (_) => const HomePage());
+      return MaterialPageRoute(
+          settings: routeSettings, builder: (_) => const HomePage());
 
     case ProfilePage.routeName:
-      return MaterialPageRoute(settings: routeSettings, builder: (_) => const ProfilePage());
+      return MaterialPageRoute(
+          settings: routeSettings, builder: (_) => const ProfilePage());
 
     case CartPage.routeName:
-      return MaterialPageRoute( settings: routeSettings, builder: (_) => const CartPage()); 
+      return MaterialPageRoute(
+          settings: routeSettings, builder: (_) => const CartPage());
 
     case AdminScreenLayoutDimension.routeName:
       return MaterialPageRoute(
-        settings: routeSettings, builder: (_) => const AdminScreenLayoutDimension(
-          mobileAdminPage: MobileAdminPage(),
-          webAdminPage: WebAdminPage(),
-        )
-      );
+          settings: routeSettings,
+          builder: (_) => const AdminScreenLayoutDimension(
+                mobileAdminPage: MobileAdminPage(),
+                webAdminPage: WebAdminPage(),
+              ));
 
     case ProductsPage.routeName:
-      return MaterialPageRoute(settings: routeSettings, builder: (_) => const ProductsPage());
+      return MaterialPageRoute(
+          settings: routeSettings, builder: (_) => const ProductsPage());
 
     case AnalyticPage.routeName:
-      return MaterialPageRoute(settings: routeSettings, builder: (_) => const AnalyticPage());
+      return MaterialPageRoute(
+          settings: routeSettings, builder: (_) => const AnalyticPage());
 
     // ignore: unreachable_switch_case
     case OrdersPage.routeName:
-      return MaterialPageRoute(settings: routeSettings, builder: (_) => const OrdersPage());
+      return MaterialPageRoute(
+          settings: routeSettings, builder: (_) => const OrdersPage());
 
     case AddProductPage.routeName:
-      return MaterialPageRoute(settings: routeSettings, builder: (_) => const AddProductPage());
+      return MaterialPageRoute(
+          settings: routeSettings, builder: (_) => const AddProductPage());
+
+    case CategoryDealPage.routeName:
+      var category = routeSettings.arguments as String;
+      return MaterialPageRoute(
+          settings: routeSettings,
+          builder: (_) => CategoryDealPage(
+                category: category,
+              ));
+
+    case SearchPage.routeName:
+      var searchQuery = routeSettings.arguments as String;
+      return MaterialPageRoute(
+          settings: routeSettings,
+          builder: (_) => SearchPage(
+                searchQuery: searchQuery,
+              ));
 
     default:
       return MaterialPageRoute(
-        settings: routeSettings, builder: (_) => const Scaffold(
+        settings: routeSettings,
+        builder: (_) => const Scaffold(
           body: Center(
             child: Text('Screen does not exist!'),
           ),

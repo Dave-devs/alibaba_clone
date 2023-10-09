@@ -31,7 +31,7 @@ const picHolder = [
   'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvg-aZreXB84S6bVcUWsLIPQkaH39sB_xDSg&usqp=CAU',
 ];
 
-const List<Map<String, String>> valuesImages = [
+const List<Map<String, String>> categoryImages = [
   {
     'name': "Fashion & Wears",
     'image': 'https://img.icons8.com/?size=80&id=nr3bIWoY2G1H&format=png'

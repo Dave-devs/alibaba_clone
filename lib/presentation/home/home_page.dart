@@ -6,6 +6,7 @@ import 'package:alibaba_clone/presentation/home/widget/appbar_widget.dart';
 import 'package:alibaba_clone/presentation/home/widget/corousel_slider_widget.dart';
 import 'package:alibaba_clone/presentation/home/widget/product_pics_widget.dart';
 import 'package:alibaba_clone/presentation/home/widget/values_widget.dart';
+import 'package:alibaba_clone/presentation/search/search_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -19,6 +20,14 @@ class HomePage extends ConsumerStatefulWidget {
 }
 
 class _HomePageState extends ConsumerState<HomePage> {
+
+  void navigateToSearchPage(String query) {
+    Navigator.pushNamed(
+      context,
+      SearchPage(searchQuery: query) as String,
+      arguments: query
+    );
+  }
   @override
   Widget build(BuildContext context) {
     final user = ref.watch(userChangedNotifierProvider).user;
@@ -27,7 +36,10 @@ class _HomePageState extends ConsumerState<HomePage> {
         appBar: PreferredSize(
             preferredSize: Size.fromHeight(60.h),
             child: HomeAppBar(
-              onPressed: () {},
+              onFieldSubmitted: navigateToSearchPage,
+              onPressed: () { 
+                //This is for Icon click
+              },
             )),
         body: ListView(
           children: [

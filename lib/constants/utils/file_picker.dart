@@ -33,5 +33,3 @@ Future<List<File>> pickMultipleImages() async {
   }
   return images;
 }
-
-

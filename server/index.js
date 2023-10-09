@@ -2,9 +2,11 @@
 const express = require('express');
 const mongoose = require('mongoose');
 
-//Imports from moules(folders or files within our server)
+//Imports from modules(folders or files within our server)
 const appRouter = require('./routes/auth.js');
 const adminRouter = require('./routes/admin.js');
+const productRouter = require('./routes/products.js');
+const searchRouter = require('./routes/search.js');
 const password = require("./secrets.js");
 
 //Packages Initializations
@@ -16,6 +18,8 @@ const uri = `mongodb+srv://odetundeoreoluwadavid:${password}@alibabacloneappclus
 app.use(express.json());
 app.use(appRouter);
 app.use(adminRouter);
+app.use(productRouter);
+app.use(searchRouter);
 
 //Connect to Database(MongoDB) at port 3000
 mongoose.connect(uri)

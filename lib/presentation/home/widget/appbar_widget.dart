@@ -4,7 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomeAppBar extends StatelessWidget {
   final void Function()? onPressed;
-  const HomeAppBar({super.key, this.onPressed});
+  final void Function(String)? onFieldSubmitted;
+  const HomeAppBar({super.key, this.onPressed, this.onFieldSubmitted});
 
   @override
   Widget build(BuildContext context) {
@@ -13,6 +14,7 @@ class HomeAppBar extends StatelessWidget {
         children: [
           Expanded(
             child: ReusableTextfield(
+              onFieldSubmitted: onFieldSubmitted,
               hintText: 'Search goods...',
               hintStyle: TextStyle(fontSize: 14.sp),
               prefixIcon: const Icon(Icons.search),

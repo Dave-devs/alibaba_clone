@@ -10,7 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cloudinary_public/cloudinary_public.dart';
 import 'package:http/http.dart' as http;
-import 'package:http/http.dart';
 
 class AdminServices {
   //Handle Sell Product method
@@ -50,7 +49,7 @@ class AdminServices {
           quantity: quantity);
 
       //Connect with Add Product Server Request
-      Response response = await http.post(Uri.parse('$ip/admin/add-product'),
+      http.Response response = await http.post(Uri.parse('$ip/admin/add-product'),
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
             'x-auth-token': userProvider.user.token
@@ -81,7 +80,7 @@ class AdminServices {
 
     try {
       //Connect with Get Product Server Request
-      Response response = await http
+      http.Response response = await http
           .get(Uri.parse('$ip/admin/get-product'), headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'x-auth-token': userProvider.user.token
@@ -115,7 +114,7 @@ class AdminServices {
     final userProvider = ref.read(userChangedNotifierProvider);
 
     try {
-      Response response = await http.post(Uri.parse('$ip/admin/delete-product'),
+      http.Response response = await http.post(Uri.parse('$ip/admin/delete-product'),
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
             'x-auth-token': userProvider.user.token
