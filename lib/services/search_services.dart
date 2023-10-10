@@ -4,7 +4,7 @@ import 'dart:convert';
 
 import 'package:alibaba_clone/constants/utils/error_handler.dart';
 import 'package:alibaba_clone/constants/utils/snackbar.dart';
-import 'package:alibaba_clone/presentation/admin_features/model/product_model.dart';
+import 'package:alibaba_clone/model/product_model.dart';
 import 'package:alibaba_clone/presentation/authentication/provider/auth_provider.dart';
 import 'package:alibaba_clone/secrets/ip_address.dart';
 import 'package:flutter/material.dart';

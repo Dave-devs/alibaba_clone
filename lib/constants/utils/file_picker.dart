@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:file_picker/file_picker.dart';
-import 'package:image_picker/image_picker.dart';
+// import 'package:image_picker/image_picker.dart';
 
 Future<List<File>> filePicker() async {
   List<File> images = [];
@@ -21,15 +21,15 @@ Future<List<File>> filePicker() async {
 }
 
 
-Future<List<File>> pickMultipleImages() async {
-  List<File> images = [];
-  try {
-    List<XFile>? pickedFiles = await ImagePicker().pickMultiImage();
-    if (pickedFiles != null) {
-      images = pickedFiles.map((XFile file) => File(file.path)).toList();
-    }
-  } catch (e) {
-    throw Exception(e.toString());
-  }
-  return images;
-}
+// Future<List<File>> pickMultipleImages() async {
+//   List<File> images = [];
+//   try {
+//     List<XFile>? pickedFiles = await ImagePicker().pickMultiImage();
+//     if (pickedFiles != null) {
+//       images = pickedFiles.map((XFile file) => File(file.path)).toList();
+//     }
+//   } catch (e) {
+//     throw Exception(e.toString());
+//   }
+//   return images;
+// }

@@ -1,3 +1,4 @@
+import 'package:alibaba_clone/model/product_model.dart';
 import 'package:alibaba_clone/presentation/admin_features/presentation/add_product/add_product_page.dart';
 import 'package:alibaba_clone/presentation/admin_features/presentation/admin_dimension_layout/admin_page_dimension.dart';
 import 'package:alibaba_clone/presentation/admin_features/presentation/mobileAdminPage/mobile_admin_page.dart';
@@ -9,6 +10,7 @@ import 'package:alibaba_clone/presentation/category/category_page.dart';
 import 'package:alibaba_clone/presentation/dimension/layout_buider.dart';
 import 'package:alibaba_clone/presentation/home/home_page.dart';
 import 'package:alibaba_clone/presentation/mobile_screen/mobile_screen.dart';
+import 'package:alibaba_clone/presentation/product_details/product_details_page.dart';
 import 'package:alibaba_clone/presentation/profile/profile_page.dart';
 import 'package:alibaba_clone/presentation/search/search_page.dart';
 import 'package:alibaba_clone/presentation/web_screen/web_screen.dart';
@@ -94,6 +96,14 @@ Route<dynamic>? onGenerateRoute(RouteSettings routeSettings) {
           settings: routeSettings,
           builder: (_) => SearchPage(
                 searchQuery: searchQuery,
+              ));
+
+    case ProductDetailsPage.routeName:
+      var product = routeSettings.arguments as ProductModel;
+      return MaterialPageRoute(
+          settings: routeSettings,
+          builder: (_) => ProductDetailsPage(
+                product: product,
               ));
 
     default:

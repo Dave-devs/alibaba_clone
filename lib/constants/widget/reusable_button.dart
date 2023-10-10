@@ -5,12 +5,13 @@ class ReusableButton extends StatelessWidget {
   final TextStyle? style;
   final void Function()? onPressed;
   final Size? minimumSize;
+  final Color? backgroundColor;
   const ReusableButton({
     Key? key,
     required this.text,
     this.style,
     this.onPressed,
-    this.minimumSize,
+    this.minimumSize, this.backgroundColor,
   }) : super(key: key);
 
   @override
@@ -19,7 +20,8 @@ class ReusableButton extends StatelessWidget {
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
         minimumSize: minimumSize,
-        elevation: 1.5
+        elevation: 1.5,
+        backgroundColor: backgroundColor
       ),
       child: Text(text, style: style,),
     );

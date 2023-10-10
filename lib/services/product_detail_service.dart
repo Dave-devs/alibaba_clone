@@ -11,20 +11,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 
-class HomeServices {
-  Future<List<ProductModel>> getCategoryProducts({
+class ProductDetailServices{
+  void rateProduct({
     required BuildContext context,
     required WidgetRef ref,
-    required String category,
+    required ProductModel product,
+    required double rating,
   }) async {
     final userProvider = ref.read(userChangedNotifierProvider);
-    //Empty productList
-    List<ProductModel> productList = [];
 
     try {
-      //Connect with Get Product Server Request
-      http.Response response = await http.get(
-        Uri.parse('$ip/api/products?category=$category'),
+
+      http.Response response = await http.post(
+        Uri.parse('$ip/api/rate-product'),
+        body: jsonEncode({
+          'id': product.id!,
+          'rating': rating,
+        }),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
           'x-auth-token': userProvider.user.token
@@ -36,19 +39,11 @@ class HomeServices {
         response: response,
         context: context,
         onSuccess: () {
-          for (int i = 0; i < jsonDecode(response.body).length; i++) {
-            productList.add(
-              ProductModel.fromJson(
-                jsonEncode(jsonDecode(response.body)[i])
-              )
-            );
-          }
+          
         }
       );
     } catch (e) {
       flutterToast(e.toString());
     }
-    //Return the gotten data
-    return productList;
   }
 }

@@ -1,5 +1,5 @@
 import 'package:alibaba_clone/constants/widget/single_product.dart';
-import 'package:alibaba_clone/presentation/admin_features/model/product_model.dart';
+import 'package:alibaba_clone/model/product_model.dart';
 import 'package:alibaba_clone/presentation/admin_features/presentation/add_product/add_product_page.dart';
 import 'package:alibaba_clone/presentation/admin_features/services/admin_services.dart';
 import 'package:flutter/material.dart';

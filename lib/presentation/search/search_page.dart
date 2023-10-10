@@ -1,6 +1,7 @@
-import 'package:alibaba_clone/presentation/admin_features/model/product_model.dart';
+import 'package:alibaba_clone/model/product_model.dart';
 import 'package:alibaba_clone/presentation/home/widget/address_widget.dart';
 import 'package:alibaba_clone/presentation/home/widget/appbar_widget.dart';
+import 'package:alibaba_clone/presentation/product_details/product_details_page.dart';
 import 'package:alibaba_clone/presentation/search/widgets/searched_products.dart';
 import 'package:alibaba_clone/services/search_services.dart';
 import 'package:flutter/material.dart';
@@ -43,6 +44,14 @@ class _SearchPageState extends ConsumerState<SearchPage> {
     );
   }
 
+  // void navigateToProductDetail(index) {
+  //   Navigator.pushNamed(
+  //     context,
+  //     ProductDetailsPage.routeName,
+  //     arguments: products![index]
+  //   );
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,7 +77,15 @@ class _SearchPageState extends ConsumerState<SearchPage> {
                     itemCount: products!.length,
                     itemBuilder: (context, index) {
                       final productData = products![index];
-                      return SearchedProducts(product: productData,);
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.pushNamed(
+                            context, ProductDetailsPage.routeName,
+                            arguments: products![index]
+                          );
+                        },
+                        child: SearchedProducts(product: productData,)
+                      );
                     }
                   )
                 ),
