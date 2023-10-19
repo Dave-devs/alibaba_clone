@@ -54,16 +54,17 @@ dependencies:
   image_picker: ^1.0.2
   video_player: ^2.7.0
   carousel_slider: ^4.2.1
-  intl: ^0.18.1
   riverpod: ^2.3.7
   riverpod_annotation: ^2.1.2
   smooth_page_indicator: ^1.1.0
   uuid: ^3.0.7
   dotted_border: ^2.1.0
-
   file_picker: ^5.5.0
   cloudinary_public: ^0.21.0
   flutter_rating_bar: ^4.0.1
+  pay: ^1.1.2
+  intl:
+  fl_chart: ^0.64.0
 
 dev_dependencies:
   flutter_test:
@@ -92,6 +93,8 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
+    - assets/applepay.json
+    - assets/gpay.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

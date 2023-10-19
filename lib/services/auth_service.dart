@@ -29,6 +29,7 @@ class AuthService {
         address: '',
         type: '',
         token: '',
+        cart: const []
       );
 
       //Connect with auth signup server and add user data to it

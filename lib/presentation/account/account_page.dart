@@ -1,18 +1,25 @@
-import 'package:alibaba_clone/presentation/profile/widget/appbar_name.dart';
-import 'package:alibaba_clone/presentation/profile/widget/orders.dart';
-import 'package:alibaba_clone/presentation/profile/widget/four_buttons.dart';
+import 'package:alibaba_clone/services/account_service.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:alibaba_clone/presentation/account/widget/appbar_name.dart';
+import 'package:alibaba_clone/presentation/account/widget/four_buttons.dart';
+import 'package:alibaba_clone/presentation/account/widget/orders.dart';
 
-class ProfilePage extends StatefulWidget {
+class AccountPage extends ConsumerStatefulWidget {
   static const String routeName = '/profile_page';
-  const ProfilePage({super.key});
+  const AccountPage({super.key});
 
   @override
-  State<ProfilePage> createState() => _ProfilePageState();
+  ConsumerState<AccountPage> createState() => _AccountPageState();
 }
 
-class _ProfilePageState extends State<ProfilePage> {
+class _AccountPageState extends ConsumerState<AccountPage> {
+  final AccountServices accountServices = AccountServices();
+
+  void logOut() {
+    accountServices.logOut(context: context, ref: ref);
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +40,9 @@ class _ProfilePageState extends State<ProfilePage> {
 
           SizedBox(height: 10.h),
 
-          const FourButtons(),
+          FourButtons(
+            onLogOutPressed: logOut
+          ),
 
           SizedBox(height: 20.h),
 

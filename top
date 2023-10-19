@@ -1,0 +1,23 @@
+[33m454306f[m[33m ([m[1;36mHEAD -> [m[1;32mfeatures[m[33m)[m Added Product Detail Page and added product rating logic
+[33m9ea37ea[m Added Category Page UI and Searched Page UI
+[33m9720f83[m Fixed error in imagePicker method
+[33m21f816b[m Added Product Model and Fixed error in AddProduct UI
+[33m9f32896[m Added Products Page UI and Add Product Page UI
+[33m956da7a[m Added Admin Features
+[33m7d614b8[m Fixed error in home page UI
+[33m3a28f32[m Added home page UI
+[33m6c72d40[m Added Profile page UI and change the color Palette
+[33m5a74505[m Added MobileScreen as the page for BottomNavBar and solved bug in User Model class
+[33mb61682b[m Switched from Riverpod State Management to Provider State Management
+[33m63e0426[m Corrected the bug in the server
+[33m13d794a[m Added form validation to login and register textfields
+[33m2b2d1a5[m Refactored the code palette and custom textfield
+[33md53dc87[m Validated the generated jwt token and created a get request to get the user details
+[33mcfef69a[m Refactored some part of my code
+[33m8cb89a2[m Added AuthService for both signup and signin screen
+[33m53cc4bb[m Created signin server post request and made validation on it
+[33m88fd8ce[m Created signup server post request and made validation on it
+[33m246e382[m Added server into the application
+[33m86b055a[m Added both login and register authentication screens UI
+[33m87cea1d[m Added app folder structure and app palette.
+[33md767c4e[m[33m ([m[1;32mmaster[m[33m)[m Initialize empty master branch

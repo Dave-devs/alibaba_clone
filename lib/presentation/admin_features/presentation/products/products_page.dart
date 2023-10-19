@@ -17,7 +17,7 @@ class ProductsPage extends ConsumerStatefulWidget {
 
 class _ProductsPageState extends ConsumerState<ProductsPage> {
   final AdminServices adminServices = AdminServices();
-  List<ProductModel>? products;
+  List<Product>? products;
 
   @override
   void initState() {
@@ -25,21 +25,20 @@ class _ProductsPageState extends ConsumerState<ProductsPage> {
     getAllProducts();
   }
 
-   getAllProducts() async {
+  getAllProducts() async {
     products = await adminServices.getAllProducts(ref: ref, context: context);
     setState(() {});
   }
 
-  deleteProduct(ProductModel productModel, int index) async {
+  deleteProduct(Product productModel, int index) async {
     await adminServices.deleteProduct(
-      ref: ref,
-      context: context,
-      productModel: productModel,
-      onSuccess: () {
-        products!.removeAt(index);
-        setState(() { });
-      }
-    );
+        ref: ref,
+        context: context,
+        productModel: productModel,
+        onSuccess: () {
+          products!.removeAt(index);
+          setState(() {});
+        });
   }
 
   navigateToAddProduct() {
@@ -48,65 +47,68 @@ class _ProductsPageState extends ConsumerState<ProductsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return products == null ? 
-    const Center(child: CircularProgressIndicator(),) 
-    : Scaffold(
-      appBar: AppBar(
-        title: Image.asset(
-          'assets/images/alibaba_group.png',
-          scale: 10,
-        ),
-      ),
-            
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: navigateToAddProduct,
-        label: Row(
-          children: [
-            const Icon(Icons.add, size: 28,),
-
-            SizedBox(width: 2.w,),
-
-            const Text(
-              'Add Product',
-              style: TextStyle(fontWeight: FontWeight.w600),
+    return products == null
+        ? const Center(
+            child: CircularProgressIndicator(),
+          )
+        : Scaffold(
+            appBar: AppBar(
+              title: Image.asset(
+                'assets/images/alibaba_group.png',
+                scale: 10,
+              ),
             ),
-          ],
-        ),
-        elevation: 2,
-      ),
-
-      body: GridView.builder(
-        itemCount: products!.length,
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-        itemBuilder: (context, index) {
-          final productData = products![index];
-            return Column(
-              children: [
-                SingleProduct(src: productData.images[0],),
-         
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Expanded(
-                      child: Text(
-                        productData.productName,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 2,
+            floatingActionButton: FloatingActionButton.extended(
+              onPressed: navigateToAddProduct,
+              label: Row(
+                children: [
+                  const Icon(
+                    Icons.add,
+                    size: 28,
+                  ),
+                  SizedBox(
+                    width: 2.w,
+                  ),
+                  const Text(
+                    'Add Product',
+                    style: TextStyle(fontWeight: FontWeight.w600),
+                  ),
+                ],
+              ),
+              elevation: 2,
+            ),
+            body: GridView.builder(
+                itemCount: products!.length,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2),
+                itemBuilder: (context, index) {
+                  final productData = products![index];
+                  return Column(
+                    children: [
+                      SingleProduct(
+                        src: productData.images[0],
                       ),
-                    ),
-                        
-                    IconButton(
-                      onPressed: () => deleteProduct(productData, index),
-                      icon: const Icon(
-                        Icons.delete_outline,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Expanded(
+                            child: Text(
+                              productData.productName,
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 2,
+                            ),
+                          ),
+                          IconButton(
+                            onPressed: () => deleteProduct(productData, index),
+                            icon: const Icon(
+                              Icons.delete_outline,
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                  ],
-                ),
-              ],
-            );
-        }
-    ),
-  );
+                    ],
+                  );
+                }),
+          );
   }
 }

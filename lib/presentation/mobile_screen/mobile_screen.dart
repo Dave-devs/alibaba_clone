@@ -1,17 +1,19 @@
 import 'package:alibaba_clone/constants/core.dart';
 import 'package:alibaba_clone/constants/palette.dart';
+import 'package:alibaba_clone/presentation/authentication/provider/auth_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class MobileScreen extends StatefulWidget {
+class MobileScreen extends ConsumerStatefulWidget {
   static const String routeName = '/mobile_screen_page';
   const MobileScreen({super.key});
 
   @override
-  State<MobileScreen> createState() => _MobileScreenState();
+  ConsumerState<MobileScreen> createState() => _MobileScreenState();
 }
 
-class _MobileScreenState extends State<MobileScreen> {
+class _MobileScreenState extends ConsumerState<MobileScreen> {
   late PageController _controller;
   int _pageIndex = 0;
 
@@ -39,6 +41,7 @@ class _MobileScreenState extends State<MobileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final userCartLen = ref.watch(userChangedNotifierProvider).user.cart.length;
     return Scaffold(
       body: PageView(
         controller: _controller,
@@ -80,8 +83,8 @@ class _MobileScreenState extends State<MobileScreen> {
           ),
 
           BottomNavigationBarItem(
-            icon: _pageIndex == 2 ? Badge.count(
-              count: 2,
+            icon: _pageIndex == 0 ? Badge.count(
+              count: userCartLen,
               child: Container(
                 width: w,
                 height: h,

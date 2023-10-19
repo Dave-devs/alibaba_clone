@@ -19,7 +19,7 @@ class SearchPage extends ConsumerStatefulWidget {
 
 class _SearchPageState extends ConsumerState<SearchPage> {
   final SearchServices searchServices = SearchServices();
-  List<ProductModel>? products;
+  List<Product>? products;
 
   @override
   void initState() {
@@ -29,19 +29,13 @@ class _SearchPageState extends ConsumerState<SearchPage> {
 
   getSearchedProducts() async {
     products = await searchServices.getSearchedProducts(
-      context: context,
-      ref: ref,
-      query: widget.searchQuery
-    );
-    setState(() { });
+        context: context, ref: ref, query: widget.searchQuery);
+    setState(() {});
   }
 
   void navigateToSearchPage(String query) {
-    Navigator.pushNamed(
-      context,
-      SearchPage(searchQuery: query) as String,
-      arguments: query
-    );
+    Navigator.pushNamed(context, SearchPage(searchQuery: query) as String,
+        arguments: query);
   }
 
   // void navigateToProductDetail(index) {
@@ -56,39 +50,38 @@ class _SearchPageState extends ConsumerState<SearchPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(60.h),
-        child: HomeAppBar(
-          onFieldSubmitted: navigateToSearchPage,
-          onPressed: () {
-                    //This is for Icon click
-          },
-        )
-      ),
+          preferredSize: Size.fromHeight(60.h),
+          child: HomeAppBar(
+            onFieldSubmitted: navigateToSearchPage,
+            onPressed: () {
+              //This is for Icon click
+            },
+          )),
       body: products == null
-          ? const Center( child: CircularProgressIndicator(),)
+          ? const Center(
+              child: CircularProgressIndicator(),
+            )
           : Column(
               children: [
                 const AddressWidget(text: 'Address here'),
-
-                SizedBox(height: 10.h,),
-
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: products!.length,
-                    itemBuilder: (context, index) {
-                      final productData = products![index];
-                      return GestureDetector(
-                        onTap: () {
-                          Navigator.pushNamed(
-                            context, ProductDetailsPage.routeName,
-                            arguments: products![index]
-                          );
-                        },
-                        child: SearchedProducts(product: productData,)
-                      );
-                    }
-                  )
+                SizedBox(
+                  height: 10.h,
                 ),
+                Expanded(
+                    child: ListView.builder(
+                        itemCount: products!.length,
+                        itemBuilder: (context, index) {
+                          final productData = products![index];
+                          return GestureDetector(
+                              onTap: () {
+                                Navigator.pushNamed(
+                                    context, ProductDetailsPage.routeName,
+                                    arguments: products![index]);
+                              },
+                              child: SearchedProducts(
+                                product: productData,
+                              ));
+                        })),
               ],
             ),
     );

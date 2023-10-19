@@ -1,7 +1,7 @@
 const express = require('express');
 const searchRouter = express.Router();
 const auth = require('../middlewares/auth');
-const Product = require('../models/product');
+const {Product} = require('../models/product');
 
 searchRouter.get('/api/products/search:productName', auth, async (req, res) => {
     try {

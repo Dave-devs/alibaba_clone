@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 
-/**NOTE: This auth middleware for getting user data will make sure that the user is an authorized user accessing the data.
+/**NOTE: This auth middleware for getting user data will make sure that the user is an authorized user before accessing the data.
  * That the user only have the capacity to access this route if signed in.
  */
 const auth = async (req, res, next) => {

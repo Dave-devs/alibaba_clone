@@ -6,8 +6,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:alibaba_clone/constants/widget/ratings.dart';
 
 class SearchedProducts extends ConsumerWidget {
-  final ProductModel product;
-const SearchedProducts({ Key? key, required this.product }) : super(key: key);
+  final Product product;
+  const SearchedProducts({Key? key, required this.product}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -28,10 +28,17 @@ const SearchedProducts({ Key? key, required this.product }) : super(key: key);
     return Column(
       children: [
         Container(
-          margin: EdgeInsets.symmetric(horizontal: 10.w,),
+          margin: EdgeInsets.symmetric(
+            horizontal: 10.w,
+          ),
           child: Row(
             children: [
-              Image.network(product.images[0], fit: BoxFit.contain, height: 135.h, width: 135.w,),
+              Image.network(
+                product.images[0],
+                fit: BoxFit.contain,
+                height: 135.h,
+                width: 135.w,
+              ),
               Column(
                 children: [
                   Container(
@@ -40,18 +47,14 @@ const SearchedProducts({ Key? key, required this.product }) : super(key: key);
                     child: Text(
                       product.productName,
                       maxLines: 2,
-                      style: TextStyle(
-                        fontSize: 16.sp
-                      ),
+                      style: TextStyle(fontSize: 16.sp),
                     ),
                   ),
-
                   Container(
                     width: 235.w,
                     padding: EdgeInsets.only(left: 10.w, top: 5.h),
                     child: Ratings(ratings: avgRating),
                   ),
-
                   Container(
                     width: 235.w,
                     padding: EdgeInsets.only(left: 10.w, top: 5.h),
@@ -64,19 +67,21 @@ const SearchedProducts({ Key? key, required this.product }) : super(key: key);
                       ),
                     ),
                   ),
-
                   Container(
                     width: 235.w,
                     padding: EdgeInsets.only(left: 10.w),
-                    child: const Text('Eligible for FREE Shipping',),
+                    child: const Text(
+                      'Eligible for FREE Shipping',
+                    ),
                   ),
-
                   Container(
                     width: 235.w,
                     padding: EdgeInsets.only(left: 10.w, top: 5.h),
                     child: Text(
                       'In Stock',
-                      style: TextStyle( color: flexSchemeLight.primary,),
+                      style: TextStyle(
+                        color: flexSchemeLight.primary,
+                      ),
                     ),
                   ),
                 ],

@@ -1,7 +1,7 @@
 const express = require('express');
 const productRouter = express.Router();
 const auth = require('../middlewares/auth');
-const Product = require('../models/product');
+const {Product} = require('../models/product');
 
 
 //How url will be something like this {'/api/products?category=${category}'}
@@ -55,6 +55,48 @@ productRouter.post('/api/rate-product', auth, async (req, res) => {
         console.error(e.message);
         res.status(500).json({error: e.message});
     }
-})
+});
+
+//SERVER REQUEST TO GET DEAL OF THE DAY
+productRouter.get('/api/deal-of-the-day', auth, async (req, res) => {
+    try {
+        //Get all products
+        let products = await Product.find({});
+
+        products = products.sort((a, b) => {
+            let aSum = 0;
+            let bSum = 0;
+
+            //We loop through all element of ratings in a products ascendingly
+            for (let i = 0; i < a.ratings.length; i++) {
+                //Assign the value at index 0 to aSum
+                aSum += a.ratings[i].rating;
+            };
+
+            //We loop through all element of ratings in a products descendingly
+            for (let i = 0; i < b.ratings.length; i++) {
+                //Assign the value at index 0 to bSum
+                bSum += b.ratings[i].rating;
+            };
+
+            /**Note: For example if aSum is 10 at index 0 and bSum is 50 at index 0.
+             * In the return statement below, we check if aSum is less than bSum,
+             * we return 1 else we return -1(negative 1);
+             * we could have done it like this
+             * (result = aSum - bSum) and return result;
+             */
+
+            //Condition which it will sort
+            return aSum < bSum ? 1 : -1;
+        });
+
+        res.json(products[0]);
+
+        
+    } catch (e) {
+        console.error(e.message);
+        res.status(500).json({error: e.message});
+    }
+});
 
 module.exports = productRouter;

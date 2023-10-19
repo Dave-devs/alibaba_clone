@@ -1,9 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
-
 import 'package:alibaba_clone/model/rating_model.dart';
 
-class ProductModel {
+class Product {
   final String? id;
   final List<String> images;
   final String productName;
@@ -13,7 +12,7 @@ class ProductModel {
   final double quantity;
   final List<RatingModel>? rating;
 
-  ProductModel({
+  Product({
     this.id,
     required this.images,
     required this.productName,
@@ -23,8 +22,6 @@ class ProductModel {
     required this.quantity,
     this.rating,
   });
-
-  
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
@@ -39,8 +36,8 @@ class ProductModel {
     };
   }
 
-  factory ProductModel.fromMap(Map<String, dynamic> map) {
-    return ProductModel(
+  factory Product.fromMap(Map<String, dynamic> map) {
+    return Product(
       id: map['_id'] != null ? map['id'] as String : null,
       images: List<String>.from((map['images'] as List<String>)),
       productName: map['productName'] as String,
@@ -48,11 +45,18 @@ class ProductModel {
       category: map['category'] as String,
       price: map['price'] as double,
       quantity: map['quantity'] as double,
-      rating: map['ratings'] != null ? List<RatingModel>.from((map['rating'] as List<int>).map<RatingModel?>((x) => RatingModel.fromMap(x as Map<String,dynamic>),),) : null,
+      rating: map['ratings'] != null
+          ? List<RatingModel>.from(
+              (map['rating'] as List<int>).map<RatingModel?>(
+                (x) => RatingModel.fromMap(x as Map<String, dynamic>),
+              ),
+            )
+          : null,
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory ProductModel.fromJson(String source) => ProductModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory Product.fromJson(String source) =>
+      Product.fromMap(json.decode(source) as Map<String, dynamic>);
 }

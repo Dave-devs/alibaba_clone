@@ -1,30 +1,30 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'dart:convert';
-
 import 'package:alibaba_clone/constants/utils/error_handler.dart';
 import 'package:alibaba_clone/constants/utils/snackbar.dart';
 import 'package:alibaba_clone/model/product_model.dart';
+import 'package:alibaba_clone/model/user_model.dart';
 import 'package:alibaba_clone/presentation/authentication/provider/auth_provider.dart';
 import 'package:alibaba_clone/secrets/ip_address.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 
-class HomeServices {
-  Future<List<ProductModel>> getCategoryProducts({
+class CartServices {
+  void removeFromCart({
     required BuildContext context,
     required WidgetRef ref,
-    required String category,
+    required Product product,
   }) async {
     final userProvider = ref.read(userChangedNotifierProvider);
-    //Empty productList
-    List<ProductModel> productList = [];
 
     try {
-      //Connect with Get Product Server Request
-      http.Response response = await http.get(
-        Uri.parse('$ip/api/products?category=$category'),
+      http.Response response = await http.delete(
+        Uri.parse('$ip/api/remove-from-cart'),
+        body: jsonEncode({
+          'id': product.id!,
+        }),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
           'x-auth-token': userProvider.user.token
@@ -36,19 +36,11 @@ class HomeServices {
         response: response,
         context: context,
         onSuccess: () {
-          for (int i = 0; i < jsonDecode(response.body).length; i++) {
-            productList.add(
-              ProductModel.fromJson(
-                jsonEncode(jsonDecode(response.body)[i])
-              )
-            );
-          }
-        }
-      );
+          User user = userProvider.user.copyWith(cart: jsonDecode(response.body)['cart']);
+          userProvider.setUserFromModel(user);
+        });
     } catch (e) {
       flutterToast(e.toString());
     }
-    //Return the gotten data
-    return productList;
   }
 }

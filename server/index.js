@@ -7,6 +7,7 @@ const appRouter = require('./routes/auth.js');
 const adminRouter = require('./routes/admin.js');
 const productRouter = require('./routes/products.js');
 const searchRouter = require('./routes/search.js');
+const userRouter = require('./routes/user.js');
 const password = require("./secrets.js");
 
 //Packages Initializations
@@ -20,6 +21,7 @@ app.use(appRouter);
 app.use(adminRouter);
 app.use(productRouter);
 app.use(searchRouter);
+app.use(userRouter);
 
 //Connect to Database(MongoDB) at port 3000
 mongoose.connect(uri)

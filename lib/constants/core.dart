@@ -1,8 +1,8 @@
-import 'package:alibaba_clone/presentation/admin_features/presentation/analytic/analytic_page.dart';
+import 'package:alibaba_clone/presentation/account/account_page.dart';
+import 'package:alibaba_clone/presentation/admin_features/presentation/analytic/analytic.page.dart';
 import 'package:alibaba_clone/presentation/admin_features/presentation/products/products_page.dart';
 import 'package:alibaba_clone/presentation/cart/cart_page.dart';
 import 'package:alibaba_clone/presentation/home/home_page.dart';
-import 'package:alibaba_clone/presentation/profile/profile_page.dart';
 import 'package:alibaba_clone/presentation/admin_features/presentation/orders/orders_page.dart';
 
 const double radius = 16; //8
@@ -14,7 +14,7 @@ const double h = 30;
 
 const pageList = [
   HomePage(),
-  ProfilePage(),
+  AccountPage(),
   CartPage(),
 ];
 
@@ -49,7 +49,7 @@ const List<Map<String, String>> categoryImages = [
     'image': 'https://img.icons8.com/?size=80&id=ledoOw5M8qvM&format=png'
   },
   {
-    'name': "Jwwelry & Watches",
+    'name': "Jewelry & Watches",
     'image': 'https://img.icons8.com/?size=80&id=2nVS5Wx4ZIp8&format=png'
   },
   {

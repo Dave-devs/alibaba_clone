@@ -1,6 +1,10 @@
+import 'package:alibaba_clone/model/order_model.dart';
 import 'package:alibaba_clone/model/product_model.dart';
+import 'package:alibaba_clone/presentation/account/account_page.dart';
+import 'package:alibaba_clone/presentation/address/address_page.dart';
 import 'package:alibaba_clone/presentation/admin_features/presentation/add_product/add_product_page.dart';
 import 'package:alibaba_clone/presentation/admin_features/presentation/admin_dimension_layout/admin_page_dimension.dart';
+import 'package:alibaba_clone/presentation/admin_features/presentation/analytic/analytic.page.dart';
 import 'package:alibaba_clone/presentation/admin_features/presentation/mobileAdminPage/mobile_admin_page.dart';
 import 'package:alibaba_clone/presentation/admin_features/presentation/webAdminPage/web_admin_page.dart';
 import 'package:alibaba_clone/presentation/authentication/screens/login_page.dart';
@@ -10,12 +14,11 @@ import 'package:alibaba_clone/presentation/category/category_page.dart';
 import 'package:alibaba_clone/presentation/dimension/layout_buider.dart';
 import 'package:alibaba_clone/presentation/home/home_page.dart';
 import 'package:alibaba_clone/presentation/mobile_screen/mobile_screen.dart';
+import 'package:alibaba_clone/presentation/order_details/orders_details_page.dart';
 import 'package:alibaba_clone/presentation/product_details/product_details_page.dart';
-import 'package:alibaba_clone/presentation/profile/profile_page.dart';
 import 'package:alibaba_clone/presentation/search/search_page.dart';
 import 'package:alibaba_clone/presentation/web_screen/web_screen.dart';
 import 'package:alibaba_clone/presentation/admin_features/presentation/products/products_page.dart';
-import 'package:alibaba_clone/presentation/admin_features/presentation/analytic/analytic_page.dart';
 import 'package:alibaba_clone/presentation/admin_features/presentation/orders/orders_page.dart';
 import 'package:flutter/material.dart';
 
@@ -49,9 +52,9 @@ Route<dynamic>? onGenerateRoute(RouteSettings routeSettings) {
       return MaterialPageRoute(
           settings: routeSettings, builder: (_) => const HomePage());
 
-    case ProfilePage.routeName:
+    case AccountPage.routeName:
       return MaterialPageRoute(
-          settings: routeSettings, builder: (_) => const ProfilePage());
+          settings: routeSettings, builder: (_) => const AccountPage());
 
     case CartPage.routeName:
       return MaterialPageRoute(
@@ -99,12 +102,23 @@ Route<dynamic>? onGenerateRoute(RouteSettings routeSettings) {
               ));
 
     case ProductDetailsPage.routeName:
-      var product = routeSettings.arguments as ProductModel;
+      var product = routeSettings.arguments as Product;
       return MaterialPageRoute(
           settings: routeSettings,
           builder: (_) => ProductDetailsPage(
                 product: product,
               ));
+
+    case AddressPage.routeName:
+    var totalAmount = routeSettings.arguments as String;
+      return MaterialPageRoute(
+          settings: routeSettings, builder: (_) => AddressPage(totalAmount: totalAmount,));
+          
+    case OrdersDetailsPage.routeName:
+      var orders = routeSettings.arguments as Order;
+      return MaterialPageRoute(
+          settings: routeSettings,
+          builder: (_) => OrdersDetailsPage(orders));
 
     default:
       return MaterialPageRoute(
